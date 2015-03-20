@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background">
+    
+     <RelativeLayout 
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:background="#ffffff">
+        <ImageView 
+            android:id="@+id/headphotoback"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_margin="20dp"
+            android:src="@drawable/defheadphoto_personal"
+            />
+        <ImageView 
+            android:id="@+id/headphoto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_alignLeft="@id/headphotoback"
+            android:layout_alignStart="@id/headphotoback"
+            android:layout_alignTop="@id/headphotoback"
+            android:layout_alignRight="@id/headphotoback"
+            android:layout_alignEnd="@id/headphotoback"
+            android:layout_alignBottom="@id/headphotoback"
+            />
+        
+        <LinearLayout 
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_marginTop="15dp"
+            android:layout_toRightOf="@id/headphotoback"
+            android:layout_alignTop="@id/headphotoback"
+            android:layout_alignBottom="@id/headphotoback"
+            android:layout_centerVertical="true">
+            
+            <TextView 
+                android:layout_height="0dp"
+                android:layout_width="wrap_content"
+                android:layout_weight="1"
+                android:text="用户名："
+                android:textSize="20dp"/>
+           
+             <TextView 
+                android:layout_height="0dp"
+                android:layout_width="wrap_content"
+                android:layout_weight="1"
+                android:text="本地文件数："
+                android:textSize="20dp"/>
+              <TextView 
+                android:layout_height="0dp"
+                android:layout_width="wrap_content"
+                android:layout_weight="1"
+                android:text="云盘文件数："
+                android:textSize="20dp"/>
+              
+       </LinearLayout>
+    </RelativeLayout>
+    
+
+</RelativeLayout>
+

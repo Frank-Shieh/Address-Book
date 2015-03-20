@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" 
+    android:background="#ffffff">
+    
+    <ImageView 
+        android:id="@+id/defheadphotobackgroung"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_margin="5dp"
+        android:layout_centerVertical="true"
+        android:src="@drawable/defheadphoto"
+        />
+    
+    <ImageView 
+        android:id="@+id/headphoto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/defheadphotobackgroung"
+        android:layout_alignLeft="@id/defheadphotobackgroung"
+        android:layout_alignStart="@id/defheadphotobackgroung"
+        android:layout_alignRight="@id/defheadphotobackgroung"
+        android:layout_alignEnd="@id/defheadphotobackgroung"
+        android:layout_alignBottom="@id/defheadphotobackgroung"
+        />
+    
+    <TextView 
+        android:id="@+id/name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/defheadphotobackgroung"
+        android:layout_toEndOf="@id/defheadphotobackgroung"
+        android:layout_alignTop="@id/defheadphotobackgroung"
+        android:layout_marginLeft="10dp"
+        android:layout_marginStart="10dp"
+        android:textColor="#000000"
+        android:textSize="25sp"
+        />
+    <TextView 
+        android:id="@+id/phonenumber"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@id/name"
+        android:layout_alignStart="@id/name"
+        android:layout_alignBottom="@id/defheadphotobackgroung"
+        android:textColor="#000000"
+        />
+    
+<!--     <TextView 
+        android:id="@+id/phonenumber"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/phonenumber_text"
+        android:layout_alignBottom="@id/phonenumber_text"
+        android:textColor="#000000"
+        />
+ -->    
+
+</RelativeLayout>
