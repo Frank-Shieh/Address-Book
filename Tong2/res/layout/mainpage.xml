@@ -7,6 +7,7 @@
         android:id="@+id/localcontact"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="#ffffff"
         android:divider="#666"
         android:dividerHeight="1px"
         >
