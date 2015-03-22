@@ -119,6 +119,7 @@ public class WriteExcel extends FileWrite {
 			/**
 			 * Ð´ÈëÍ·Ïñ
 			 */
+			mCell = mRow.createCell(mIndex);
 			baos = new ByteArrayOutputStream();
 			if (person.getHeadPhoto() != null) {
 				person.getHeadPhoto().compress(Bitmap.CompressFormat.PNG, 100,
@@ -129,14 +130,17 @@ public class WriteExcel extends FileWrite {
 				anchor.setAnchorType(HSSFClientAnchor.MOVE_AND_RESIZE);
 				patriarch.createPicture(anchor, mWorkBook.addPicture(
 						baos.toByteArray(), HSSFWorkbook.PICTURE_TYPE_PNG));
-			}
+				mCell.setCellValue("yes");
+			}else
+				mCell.setCellValue("no");
+			
 		}
 	}
 
 	private void writeExcel() {
 		FileOutputStream fos = null;
 		try {
-			fos = new FileOutputStream(DataManager.excelStorePath+"/test.xls");
+			fos = new FileOutputStream(DataManager.excelStorePath+"/test1.xls");
 			mWorkBook.write(fos);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block

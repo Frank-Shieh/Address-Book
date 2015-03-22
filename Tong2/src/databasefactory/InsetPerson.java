@@ -1,9 +1,13 @@
 package databasefactory;
 
+import java.io.ByteArrayOutputStream;
+
 import android.content.ContentResolver;
 import android.content.ContentValues;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.provider.ContactsContract;
+import android.provider.ContactsContract.CommonDataKinds.Photo;
 import android.util.Log;
 
 import com.reach.tong2.DataManager;
@@ -24,6 +28,7 @@ public class InsetPerson {
 		insetPhone(target);
 		insetEmail(target);
 		insetAddress(target);
+		insetHeadPhoto(target);
 	}
 	
 	private void insetName(Person target) {
@@ -34,7 +39,6 @@ public class InsetPerson {
 		mValues.put("data2", target.getName());
 		mResolver.insert(uri, mValues);
 		mValues.clear();
-		Log.i("name inset", "success");
 	}
 
 	private void insetPhone(Person target) {
@@ -93,4 +97,16 @@ public class InsetPerson {
 		}
 	}
 
+	private void insetHeadPhoto(Person target){
+		//Ìí¼ÓÍ·Ïñ
+		mValues.put("raw_contact_id", mID);
+		mValues.put(ContactsContract.Data.MIMETYPE, DataManager.MimeType.PHOTO);
+		ByteArrayOutputStream os = new ByteArrayOutputStream();
+		Bitmap temp = target.getHeadPhoto();
+		temp.compress(Bitmap.CompressFormat.PNG, 100, os);
+		mValues.put(Photo.PHOTO, os.toByteArray());
+		mResolver.insert(uri, mValues);
+		mValues.clear();
+
+	}
 }

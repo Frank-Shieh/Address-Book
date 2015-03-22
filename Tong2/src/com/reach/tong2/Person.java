@@ -2,6 +2,7 @@ package com.reach.tong2;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+
 import android.annotation.SuppressLint;
 import android.graphics.Bitmap;
 
@@ -14,8 +15,10 @@ public class Person {
 	private Bitmap mHeadPhoto;
 	private HashMap<Integer, ArrayList<String>> mPostAddress = new HashMap<Integer, ArrayList<String>>();
 	public boolean mIsFull;
+	public String mHasheadphoto = new String("no");
 
 	public Person() {
+		
 	}
 
 	public void addPhone(ArrayList<String> value, int index) {

@@ -14,19 +14,18 @@ import android.widget.TextView;
 
 public class MainPageAdapter extends CustomAdapter {
 
-	private ArrayList<Person> persons;
-	private Context context;
+	private ArrayList<Person> mPersons;
 	
-	public  MainPageAdapter(Context context) {
+	public  MainPageAdapter(Context context, ArrayList<Person> person) {
 		// TODO Auto-generated constructor stub
-		this.persons = DataManager.getAllPerson(DataManager.LOCAL);
-		this.context = context;
+		super(context);
+		this.mPersons = person;
 	}
 	
 	@Override
 	public int getCount() {
 		// TODO Auto-generated method stub
-		return persons.size();
+		return mPersons.size();
 	}
 
 	@Override
@@ -54,7 +53,7 @@ public class MainPageAdapter extends CustomAdapter {
 		if(convertView == null)
 		{
 			vh = new ViewHolder();
-			convertView = View.inflate(context, R.layout.mainpage_list, null);
+			convertView = View.inflate(mContext, R.layout.mainpage_list, null);
 			vh.name = (TextView) convertView.findViewById(R.id.name);
 			vh.phone = (TextView) convertView.findViewById(R.id.phonenumber);
 			vh.headphoto = (ImageView) convertView.findViewById(R.id.headphoto);
@@ -63,16 +62,19 @@ public class MainPageAdapter extends CustomAdapter {
 		else{
 			vh = (ViewHolder) convertView.getTag();
 		}
-		vh.name.setText(persons.get(position).getName());
+		vh.name.setText(mPersons.get(position).getName());
+		vh.phone.setText("");
 		for(int i = 0;i<DataManager.PHONETYPE.length;i++){
-			if(persons.get(position).getPhone(i) != null){
-				vh.phone.setText(DataManager.PHONETYPE[i]+"£º"+persons.get(position).getPhone(i).get(0));
+			if(mPersons.get(position).getPhone(i) != null){
+				vh.phone.setText(DataManager.PHONETYPE[i]+"£º"+mPersons.get(position).getPhone(i).get(0));
 				break;
 			}
 		}
-		Bitmap temp = persons.get(position).getHeadPhoto();
+		Bitmap temp = mPersons.get(position).getHeadPhoto();
 		if(temp != null)
 			vh.headphoto.setImageBitmap(temp);
+		else
+			vh.headphoto.setImageResource(R.drawable.defheadphoto);
 		return convertView;
 	}
 

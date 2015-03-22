@@ -1,50 +1,43 @@
 package com.reach.tong2;
 
-import customadapter.MainPageAdapter;
+import java.util.ArrayList;
+
 import android.app.ActionBar;
 import android.app.ActionBar.LayoutParams;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
+import customadapter.MainPageAdapter;
 
-public class MainPage extends Fragment implements OnClickListener {
+public class MainPage extends Fragment implements OnItemClickListener {
 
 	private ListView mLocalContact;
+	private ArrayList<Person> mPerson = DataManager.getAllPerson(DataManager.LOCAL);
+
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		View view = inflater.inflate(R.layout.mainpage, null);
 		mLocalContact = (ListView) view.findViewById(R.id.localcontact);
-		mLocalContact.setAdapter(new MainPageAdapter(getActivity()));
-//		setActionBarLayout(R.layout.actionbar);
+		mLocalContact.setAdapter(new MainPageAdapter(getActivity(), mPerson));
+		mLocalContact.setOnItemClickListener(this);
 		return view;
 	}
-
 	@Override
-	public void onClick(View v) {
+	public void onItemClick(AdapterView<?> parent, View view, int position,
+			long id) {
 		// TODO Auto-generated method stub
-
-	}
-
-	@SuppressWarnings("deprecation")
-	public void setActionBarLayout(int layoutId) {
-		ActionBar actionBar = getActivity().getActionBar();
-		if (null != actionBar) {
-			actionBar.setDisplayShowHomeEnabled(false);
-			actionBar.setDisplayShowCustomEnabled(true);
-			LayoutInflater inflator = (LayoutInflater) getActivity()
-					.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-			View v = inflator.inflate(layoutId, null);
-			ActionBar.LayoutParams layout = new ActionBar.LayoutParams(
-					LayoutParams.FILL_PARENT, LayoutParams.FILL_PARENT);
-			actionBar.setCustomView(v, layout);
-		}
+		Intent intent = new Intent("com.reach.tong2.PersonalInfo");
+		DataManager.targetPerson = mPerson.get(position);
+		startActivity(intent);
 	}
 
 }

@@ -27,7 +27,7 @@ public class ReadExcel extends FileRead {
 	private HSSFCell mcell;
 	private String[] mtitle;
 	private Person mperson;
-	private int mPhonePosition;
+	private int mHeadphotoposition = 0;
 	private int mEmailPosition;
 	private int mAddressPosition;
 	private List<HSSFPictureData> mList;
@@ -35,6 +35,7 @@ public class ReadExcel extends FileRead {
 
 	public ReadExcel(String fileName) {
 		// TODO Auto-generated constructor stub
+		super();
 		this.mfileName = fileName;
 	}
 
@@ -107,7 +108,6 @@ public class ReadExcel extends FileRead {
 			HSSFCell cell = row.getCell(i);
 			mtitle[i] = cell.getStringCellValue();
 		}
-		mPhonePosition = 1;
 		mEmailPosition = DataManager.PHONETYPE.length + 1;
 		mAddressPosition = mEmailPosition + DataManager.EMAILTYPE.length;
 	}
@@ -123,21 +123,23 @@ public class ReadExcel extends FileRead {
 		case HSSFCell.CELL_TYPE_NUMERIC: // double型的数字
 			target.add(mformat.format(mcell.getNumericCellValue()));
 			// if(cellIndex>=mAddressPosition)
-//			Log.i("phone2", mformat.format(mcell.getNumericCellValue()));
+			// Log.i("phone2", mformat.format(mcell.getNumericCellValue()));
 			mperson.addPhone(target,
 					DataManager.phonePosition.get(mtitle[cellIndex]));
 			break;
 		case HSSFCell.CELL_TYPE_STRING: // 字符串
 			target.add(mcell.getStringCellValue());
-			if (cellIndex >= mAddressPosition)
+			if (cellIndex == mAddressPosition + DataManager.ADDRESSTYPE.length)
+				mperson.mHasheadphoto = mcell.getStringCellValue();
+			else if (cellIndex >= mAddressPosition)
 				mperson.addAddress(target,
 						DataManager.addressPosition.get(mtitle[cellIndex]));
 			else if (cellIndex >= mEmailPosition)
 				mperson.addEmail(target,
 						DataManager.emailPosition.get(mtitle[cellIndex]));
-			else if(cellIndex == 0)
+			else if (cellIndex == 0)
 				mperson.addName(mcell.getStringCellValue());
-			else 
+			else
 				mperson.addPhone(target,
 						DataManager.phonePosition.get(mtitle[cellIndex]));
 			break;
@@ -160,7 +162,10 @@ public class ReadExcel extends FileRead {
 	 * 获得头像
 	 */
 	private void getHeadPhoto(int index) {
-		HSSFPictureData pdata = mList.get(index - 1);
+		if (index <= 0 || mList.size() <= 0
+				|| mperson.mHasheadphoto.equals("no"))
+			return;
+		HSSFPictureData pdata = mList.get(mHeadphotoposition++);
 		byte[] data = pdata.getData();
 		if (data.length != 0) {
 			mperson.addHeadPhoto(BitmapFactory.decodeByteArray(data, 0,

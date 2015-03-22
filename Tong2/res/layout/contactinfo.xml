@@ -4,88 +4,60 @@
     android:layout_height="match_parent"
     android:background="@drawable/background"
     android:orientation="vertical" >
-    
-    <RelativeLayout 
+
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#ffffff"
         android:layout_marginTop="10dp"
-        >
-        <ImageView 
+        android:background="#ffffff" >
+
+        <ImageView
             android:id="@+id/headphotoback_info"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="15dp"
             android:layout_centerVertical="true"
-            android:src="@drawable/defheadphoto_personal"
-            />
-        <ImageView 
+            android:layout_margin="15dp"
+            android:src="@drawable/defheadphoto_personal" />
+
+        <ImageView
             android:id="@+id/headphoto_info"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignTop="@id/headphotoback_info"
-            android:layout_alignRight="@id/headphotoback_info"
-            android:layout_alignLeft="@id/headphotoback_info"
             android:layout_alignBottom="@id/headphotoback_info"
-            android:layout_centerVertical="true"
-            />
-        <TextView 
+            android:layout_alignLeft="@id/headphotoback_info"
+            android:layout_alignRight="@id/headphotoback_info"
+            android:layout_alignTop="@id/headphotoback_info"
+            android:layout_centerVertical="true" />
+
+        <TextView
             android:id="@+id/name_text_info"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="20sp"
-            android:textColor="#000000"
             android:layout_centerVertical="true"
-            android:text="@string/person_name"
-            android:layout_toRightOf="@id/headphotoback_info"
             android:layout_toEndOf="@id/headphotoback_info"
-            />
+            android:layout_toRightOf="@id/headphotoback_info"
+            android:text="@string/person_name"
+            android:textColor="#000000"
+            android:textSize="20sp" />
 
         <TextView
             android:id="@+id/name_info"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignBottom="@id/name_text_info"
+            android:layout_centerVertical="true"
             android:layout_toEndOf="@id/name_text_info"
             android:layout_toRightOf="@id/name_text_info"
-            android:layout_centerVertical="true"
-            android:textSize="20sp" 
-            android:textColor="#000000"/>
-        
+            android:textColor="#000000"
+            android:textSize="20sp" />
     </RelativeLayout>
-    
-    
-    <ListView 
-        android:id="@+id/phonelist_info"
+
+    <ListView
+        android:id="@+id/list_info"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#ffffff"
         android:layout_marginTop="15dp"
-        android:divider="#666"
-        android:dividerHeight="1px"
-        android:padding="10dp">
-    </ListView>
-    
-    <ListView 
-        android:id="@+id/emaillist_info"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#ffffff"
-        android:layout_marginTop="15dp"
-        android:divider="#666"
-        android:dividerHeight="1px"
-        android:padding="10dp">
-    </ListView>
-    
-    <ListView 
-        android:id="@+id/addresslist_info"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#ffffff"
-        android:layout_marginTop="15dp"
-        android:divider="#666"
-        android:dividerHeight="1px"
-        android:padding="10dp">
+        android:background="#ffffff" >
     </ListView>
 
 </LinearLayout>

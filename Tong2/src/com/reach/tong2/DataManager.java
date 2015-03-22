@@ -7,10 +7,11 @@ import java.util.HashMap;
 import android.os.Environment;
 import android.provider.ContactsContract;
 import android.util.Log;
+import filefactory.LocalFiles;
 
 public class DataManager {
 
-	private static ArrayList<Person> mListExcel = new ArrayList<Person>();
+	public static ArrayList<Person> mListExcel;
 	private static ArrayList<Person> mListLocal = new ArrayList<Person>();
 	private static ArrayList<Person> mListTemp = new ArrayList<Person>();
 	public static HashMap<String, Integer> chToMath = new HashMap<String, Integer>();
@@ -24,8 +25,24 @@ public class DataManager {
 	public static final String[] PHONETYPE = { "移动号码", "家庭号码", "其他号码" };
 	public static final String[] EMAILTYPE = { "家庭邮件", "工作邮件" };
 	public static final String[] ADDRESSTYPE = { "家庭地址", "工作地址", "其他地址" };
+	public static Person targetPerson;
+	public static LocalFiles localFiles;
 
-	static {
+	static{
+		frist();
+	}
+	
+	public static void frist() {
+		File temp;
+		excelStorePath = Environment.getExternalStorageDirectory().toString();
+		temp = new File(excelStorePath + "/Tong");
+		temp.mkdirs();
+		excelStorePath = temp.toString();
+		Log.i("path", excelStorePath);
+		init();
+	}
+
+	public static void init() {
 		chToMath.put(PHONETYPE[0],
 				ContactsContract.CommonDataKinds.Phone.TYPE_MOBILE);
 		chToMath.put(PHONETYPE[1],
@@ -45,20 +62,14 @@ public class DataManager {
 		for (int i = 0; i < PHONETYPE.length; i++) {
 			phonePosition.put(PHONETYPE[i], i);
 		}
-		for(int i = 0;i<EMAILTYPE.length;i++){
+		for (int i = 0; i < EMAILTYPE.length; i++) {
 			emailPosition.put(EMAILTYPE[i], i);
 		}
-		for(int i = 0;i<ADDRESSTYPE.length;i++){
+		for (int i = 0; i < ADDRESSTYPE.length; i++) {
 			addressPosition.put(ADDRESSTYPE[i], i);
 		}
-		
-		File temp;
-		excelStorePath = Environment.getExternalStorageDirectory().toString();
-		temp = new File(excelStorePath+"/Tong");
-		temp.mkdirs();
-		excelStorePath = temp.toString();
-		Log.i("path", excelStorePath);
-		
+		localFiles = new LocalFiles();
+
 	}
 
 	public static void addPerson(int model, Person person) {
@@ -89,7 +100,7 @@ public class DataManager {
 		}
 	}
 
-	public static int getIndex(int type,int type1){
+	public static int getIndex(int type, int type1) {
 		switch (type) {
 		case 1:
 			switch (type1) {
@@ -119,9 +130,13 @@ public class DataManager {
 		}
 		return -1;
 	}
-	
-	
-	public class MimeType{
+
+	public static class TargetPerson {
+		public static ArrayList<String> mData;
+		public static ArrayList<String> mType;
+	}
+
+	public class MimeType {
 		public static final String EMAIL_V2 = "vnd.android.cursor.item/email_v2";
 		public static final String IM = "vnd.android.cursor.item/im";
 		public static final String NICKNAME = "vnd.android.cursor.item/nickname";
@@ -135,6 +150,7 @@ public class DataManager {
 		public static final String GROUP_MENMBERSHIP = "vnd.android.cursor.item/group_membership";
 
 	}
+
 	// public static int getPersonNumber(){
 	// return list.size();
 	// }

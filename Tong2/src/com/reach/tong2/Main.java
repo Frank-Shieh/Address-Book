@@ -23,15 +23,16 @@ import android.view.View.OnClickListener;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-public class Main extends FragmentActivity implements OnClickListener{
+public class Main extends FragmentActivity implements OnClickListener {
 
 	private ImageView[] mTabButton = new ImageView[4];
 	private int mPosition = 0;
-	private Fragment[] mFragment = {new MainPage(), new Massage(), new Personal()};
+	private Fragment[] mFragment = { new MainPage(), new Massage(),
+			new Personal() };
 	private FragmentManager mFManager;
 	private TextView mTitle;
-	private final String[] mTitles = {"首页","消息","个人中心"};
-	
+	private final String[] mTitles = { "首页", "消息", "个人中心" };
+
 	@Override
 	protected void onCreate(Bundle arg0) {
 		// TODO Auto-generated method stub
@@ -39,20 +40,21 @@ public class Main extends FragmentActivity implements OnClickListener{
 		setContentView(R.layout.main);
 		ReadContact temp = new ReadContact(this);
 		temp.getContact();
-//		WriteExcel temp2 = new WriteExcel();
-//		temp2.writeFile();
-//		add();
-//		WriteContact temp3 = new WriteContact(this);
-//		temp3.writeContact();
-//		UpDataContact temp4 = new UpDataContact(this, add());
-//		DeleteContact temp1 = new DeleteContact(this, DataManager.getAllPerson(DataManager.LOCAL).get(0));
-//		temp.getContact();
+//		 WriteExcel temp2 = new WriteExcel();
+//		 temp2.writeFile();
+		// add();
+		// WriteContact temp3 = new WriteContact(this);
+		// temp3.writeContact();
+		// UpDataContact temp4 = new UpDataContact(this, add());
+		// DeleteContact temp1 = new DeleteContact(this,
+		// DataManager.getAllPerson(DataManager.LOCAL).get(0));
+		// temp.getContact();
 		mFManager = getSupportFragmentManager();
 		init();
 	}
-	
-	
-	private Person add(){
+
+
+	private Person add() {
 		Person person = new Person();
 		ArrayList<String> value = new ArrayList<String>();
 		value.add("12345678");
@@ -67,46 +69,44 @@ public class Main extends FragmentActivity implements OnClickListener{
 		DataManager.addPerson(DataManager.TEMP, person);
 		return person;
 	}
-	
-	
 
-	private void init(){
+	private void init() {
 		mTitle = (TextView) setActionBarLayout().findViewById(R.id.title);
-		FragmentTransaction transaction = null;
 		mTabButton[0] = (ImageView) this.findViewById(R.id.mainpage);
 		mTabButton[0].setOnClickListener(this);
 		mTabButton[1] = (ImageView) this.findViewById(R.id.massage);
 		mTabButton[1].setOnClickListener(this);
 		mTabButton[2] = (ImageView) this.findViewById(R.id.personal);
 		mTabButton[2].setOnClickListener(this);
+		FragmentTransaction transaction = null;
 		transaction = mFManager.beginTransaction();
-		for(int i = 0;i<mFragment.length;i++){
+		for (int i = 0; i < mFragment.length; i++) {
 			transaction.add(R.id.fragment, mFragment[i]);
 			transaction.hide(mFragment[i]);
 		}
 		transaction.commit();
 		setSelection(0);
 	}
-	
-	private void setSelection(int index){
+
+	private void setSelection(int index) {
 		FragmentTransaction transaction = mFManager.beginTransaction();
 		cleanUpStep(transaction);
 		mPosition = index;
 		setNextStep(transaction);
 		transaction.commit();
 	}
-	
-	private void cleanUpStep(FragmentTransaction transaction){
+
+	private void cleanUpStep(FragmentTransaction transaction) {
 		mTabButton[mPosition].setSelected(false);
 		transaction.hide(mFragment[mPosition]);
 	}
 
-	private void setNextStep(FragmentTransaction transaction){
+	private void setNextStep(FragmentTransaction transaction) {
 		mTabButton[mPosition].setSelected(true);
 		transaction.show(mFragment[mPosition]);
 		mTitle.setText(mTitles[mPosition]);
 	}
-	
+
 	@Override
 	public void onClick(View v) {
 		// TODO Auto-generated method stub
@@ -124,7 +124,7 @@ public class Main extends FragmentActivity implements OnClickListener{
 			break;
 		}
 	}
-	
+
 	@SuppressLint("InflateParams")
 	@SuppressWarnings("deprecation")
 	public View setActionBarLayout() {
@@ -142,5 +142,5 @@ public class Main extends FragmentActivity implements OnClickListener{
 		}
 		return view;
 	}
-	
+
 }

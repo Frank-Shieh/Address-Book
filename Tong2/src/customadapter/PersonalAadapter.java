@@ -5,19 +5,17 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-public class PersonalAadapter extends BaseAdapter{
+public class PersonalAadapter extends CustomAdapter{
 
 	private String[] mData;
 	private int mLayout;
-	private Context mContext;
 
 	public PersonalAadapter(Context context,String[] data,int layout) {
+		super(context);
 		this.mData = data;
 		this.mLayout = layout;
-		this.mContext = context;
 	}
 
 	@Override

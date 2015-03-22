@@ -71,8 +71,10 @@ public class ReadContact {
 	}
 
 	private void getDataByPerson() {
+		boolean temp1 = false;
+		boolean temp2 = false;
 		while (mCursorPerson.moveToNext()) {
-			mPerson.mIsFull = true;
+			
 			String data = mCursorPerson.getString(mCursorPerson
 					.getColumnIndex("data1"));
 			String mimeType = mCursorPerson.getString(mCursorPerson
@@ -93,6 +95,7 @@ public class ReadContact {
 				else
 				target.add(data);
 				target = null;
+				temp2 = true;
 				break;
 			case 5:
 				index = DataManager.getIndex(5, type);
@@ -105,9 +108,11 @@ public class ReadContact {
 				else
 				target.add(data);
 				target = null;
+				temp2 = true;
 				break;
 			case 7:
 				mPerson.addName(data);
+				temp1 = true;
 				break;
 			case 8:
 				index = DataManager.getIndex(8, type);
@@ -120,6 +125,7 @@ public class ReadContact {
 				else
 				target.add(data);
 				target = null;
+				temp2 = true;
 				break;
 			case 10:
 				getHeadPhoto();
@@ -128,6 +134,7 @@ public class ReadContact {
 				break;
 			}
 		}
+		mPerson.mIsFull = temp1&&temp2;
 	}
 
 	private int checkType(String type) {

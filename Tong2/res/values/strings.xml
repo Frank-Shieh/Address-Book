@@ -4,4 +4,7 @@
     <string name="app_name">通讯君</string>
     <string name="action_settings">Settings</string>
 	<string name="person_name">姓名：</string>
+	<string name="username_personal">用户名：</string>
+	<string name="localfilescount_personal">本地文件数：</string>
+	<string name="netfilecount_personal">云盘文件数：</string>
 </resources>
