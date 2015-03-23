@@ -20,6 +20,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioGroup;
@@ -29,7 +30,7 @@ import android.widget.RadioGroup.OnCheckedChangeListener;
 public class Register extends Activity implements OnClickListener,
 		DialogInterface.OnClickListener {
 
-	private ImageView submit;
+	private Button submit;
 	private ImageView photo;
 	private EditText usrname;
 	private EditText pwd;
@@ -62,7 +63,7 @@ public class Register extends Activity implements OnClickListener,
 	}
 
 	private void init() {
-		submit = (ImageView) findViewById(R.id.regsubmit);
+		submit = (Button) findViewById(R.id.regsubmit);
 		submit.setOnClickListener(this);
 		photo = (ImageView) findViewById(R.id.headphoto);
 		photo.setOnClickListener(this);
@@ -228,21 +229,21 @@ public class Register extends Activity implements OnClickListener,
 	@Override
 	public void onClick(DialogInterface dialog, int which) {
 		// TODO Auto-generated method stub
-		// Intent intent = null;
-		// switch (which) {
-		// case FROMIMAGE:
-		// intent = new Intent(this,Headphotoget.class);
-		// intent.putExtra("code", IMAGE_REQUEST_CODE);
-		// intent.putExtra("from", FROMIMAGE);
-		// startActivityForResult(intent,1);
-		// break;
-		// case FROMCCAMERA:
-		// intent = new Intent(this,Headphotoget.class);
-		// intent.putExtra("code", CAMERA_REQUEST_CODE);
-		// intent.putExtra("from", FROMCCAMERA);
-		// startActivityForResult(intent,2);
-		// break;
-		// }
+		 Intent intent = null;
+		 switch (which) {
+		 case FROMIMAGE:
+		 intent = new Intent(this,Headphotoget.class);
+		 intent.putExtra("code", IMAGE_REQUEST_CODE);
+		 intent.putExtra("from", FROMIMAGE);
+		 startActivityForResult(intent,1);
+		 break;
+		 case FROMCCAMERA:
+		 intent = new Intent(this,Headphotoget.class);
+		 intent.putExtra("code", CAMERA_REQUEST_CODE);
+		 intent.putExtra("from", FROMCCAMERA);
+		 startActivityForResult(intent,2);
+		 break;
+		 }
 	}
 
 	@Override
