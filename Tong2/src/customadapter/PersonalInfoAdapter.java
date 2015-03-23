@@ -47,7 +47,7 @@ public class PersonalInfoAdapter extends CustomAdapter {
 			}
 		}
 		for(int i = 0; i<DataManager.ADDRESSTYPE.length;i++){
-			if(mPerson.getEmail(i) == null)
+			if(mPerson.getPostAddress(i) == null)
 				continue;
 			for(int j = 0;j<mPerson.getPostAddress(i).size();j++,index++){
 				DataManager.TargetPerson.mData.add(index, mPerson.getPostAddress(i).get(j));

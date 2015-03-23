@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <!--
+         <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/titlebackground" >
+
+        <ImageView
+            android:id="@+id/back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@+string/backto"
+            android:src="@drawable/backbutton" />
+        <TextView 
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:textColor="#ffffff"
+            android:textSize="25sp"
+            android:text="@string/userregister"
+            />
+    </RelativeLayout>
+        -->
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp" >
+
+            <ImageView
+                android:id="@+id/defheadphoto"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:contentDescription="@+string/register_head"
+                android:scaleType="center"
+                android:src="@drawable/defheadphoto_personal" />
+
+            <ImageView
+                android:id="@+id/headphoto"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@id/defheadphoto"
+                android:layout_alignEnd="@id/defheadphoto"
+                android:layout_alignLeft="@id/defheadphoto"
+                android:layout_alignRight="@id/defheadphoto"
+                android:layout_alignStart="@id/defheadphoto"
+                android:layout_alignTop="@id/defheadphoto" />
+
+            <EditText
+                android:id="@+id/usrname"
+                android:layout_width="180dp"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@id/defheadphoto"
+                android:layout_alignStart="@id/defheadphoto"
+                android:layout_below="@id/defheadphoto"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/edittext"
+                android:inputType="text"
+                android:maxLength="10"
+                android:singleLine="true" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@id/usrname"
+                android:layout_toLeftOf="@id/usrname"
+                android:layout_toStartOf="@id/usrname"
+                android:text="@string/username_register" />
+
+            <EditText
+                android:id="@+id/pwd"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignEnd="@id/usrname"
+                android:layout_alignLeft="@id/usrname"
+                android:layout_alignRight="@id/usrname"
+                android:layout_alignStart="@id/usrname"
+                android:layout_below="@id/usrname"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/edittext"
+                android:inputType="textPassword"
+                android:maxLength="12"
+                android:singleLine="true" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@id/pwd"
+                android:layout_toLeftOf="@id/pwd"
+                android:layout_toStartOf="@id/pwd"
+                android:text="@string/password_register" />
+
+            <EditText
+                android:id="@+id/pwdcom"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignEnd="@id/pwd"
+                android:layout_alignLeft="@id/pwd"
+                android:layout_alignRight="@id/pwd"
+                android:layout_alignStart="@id/pwd"
+                android:layout_below="@id/pwd"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/edittext"
+                android:inputType="textPassword" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@id/pwdcom"
+                android:layout_toLeftOf="@id/pwdcom"
+                android:layout_toStartOf="@id/pwdcom"
+                android:text="@string/passwordcomfirm_register" />
+
+            <RadioGroup
+                android:id="@+id/sex"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignEnd="@id/pwdcom"
+                android:layout_alignLeft="@id/pwdcom"
+                android:layout_alignRight="@id/pwdcom"
+                android:layout_alignStart="@id/pwdcom"
+                android:layout_below="@id/pwdcom"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal" >
+
+                <RadioButton
+                    android:id="@+id/male"
+                    android:text="@string/sex_male" />
+
+                <RadioButton
+                    android:id="@+id/female"
+                    android:text="@string/sex_female" />
+            </RadioGroup>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@id/sex"
+                android:layout_toLeftOf="@id/sex"
+                android:layout_toStartOf="@id/sex"
+                android:text="@string/sex_register" />
+
+            <EditText
+                android:id="@+id/email"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignEnd="@id/pwdcom"
+                android:layout_alignLeft="@id/pwdcom"
+                android:layout_alignRight="@id/pwdcom"
+                android:layout_alignStart="@id/pwdcom"
+                android:layout_below="@id/sex"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/edittext"
+                android:inputType="textEmailAddress" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@id/email"
+                android:layout_toLeftOf="@id/email"
+                android:layout_toStartOf="@id/email"
+                android:text="@string/email_register" />
+
+            <EditText
+                android:id="@+id/phone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignEnd="@id/email"
+                android:layout_alignLeft="@id/email"
+                android:layout_alignRight="@id/email"
+                android:layout_alignStart="@id/email"
+                android:layout_below="@id/email"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/edittext"
+                android:inputType="phone" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@id/phone"
+                android:layout_toLeftOf="@id/phone"
+                android:layout_toStartOf="@id/phone"
+                android:text="@string/phone_register" />
+
+        </RelativeLayout>
+
+        <Button
+            android:id="@+id/regsubmit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="15dp"
+            android:background="@drawable/submit_logn"
+            android:contentDescription="@+string/registerbutton"
+            android:text="@string/submit_register"
+            android:textColor="#ffffff" />
+    </LinearLayout>
+
+</ScrollView>

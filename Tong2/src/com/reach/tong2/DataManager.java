@@ -4,6 +4,9 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import user.User;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Environment;
 import android.provider.ContactsContract;
 import android.util.Log;
@@ -27,16 +30,20 @@ public class DataManager {
 	public static final String[] ADDRESSTYPE = { "家庭地址", "工作地址", "其他地址" };
 	public static Person targetPerson;
 	public static LocalFiles localFiles;
+	public static User user;
+	private static String userpath;
+	private static Bitmap head;
 
-	static{
-		frist();
-	}
-	
+	// static{
+	// frist();
+	// }
+
 	public static void frist() {
 		File temp;
 		excelStorePath = Environment.getExternalStorageDirectory().toString();
 		temp = new File(excelStorePath + "/Tong");
-		temp.mkdirs();
+		if (!temp.exists())
+			temp.mkdirs();
 		excelStorePath = temp.toString();
 		Log.i("path", excelStorePath);
 		init();
@@ -69,7 +76,12 @@ public class DataManager {
 			addressPosition.put(ADDRESSTYPE[i], i);
 		}
 		localFiles = new LocalFiles();
-
+		if (user != null) {
+			userpath = "/data/data/com.reach.share/user_" + user.getUsername();
+			File file = new File(userpath);
+			if (file.exists())
+				setHeadphoto(userpath + "/headphoto.png");
+		}
 	}
 
 	public static void addPerson(int model, Person person) {
@@ -149,6 +161,19 @@ public class DataManager {
 		public static final String PHOTO = "vnd.android.cursor.item/photo";
 		public static final String GROUP_MENMBERSHIP = "vnd.android.cursor.item/group_membership";
 
+	}
+
+	// 设置和获取头像
+	public static void setHeadphoto(String headphoto) {
+		head = BitmapFactory.decodeFile(headphoto);
+	}
+
+	public static void setHeadphoto(Bitmap headphoto) {
+		head = headphoto;
+	}
+
+	public static Bitmap getHeadphoto() {
+		return head;
 	}
 
 	// public static int getPersonNumber(){

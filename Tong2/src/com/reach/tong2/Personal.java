@@ -45,7 +45,8 @@ public class Personal extends Fragment implements OnItemClickListener {
 	}
 
 	private void setValueToView() {
-		mLocalFilesCount.setText(R.string.username_personal
+		mUserName.setText(this.getResources().getText(R.string.username_personal));
+		mLocalFilesCount.setText(this.getResources().getText(R.string.localfilescount_personal)
 				+ String.valueOf(DataManager.localFiles.getFilesCount()));
 	}
 

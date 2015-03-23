@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/lognbackground"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <ImageView
+            android:id="@+id/headphotobackground"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="35dp"
+            android:contentDescription="@+string/asheadbackground"
+            android:scaleType="fitCenter"
+            android:src="@drawable/headphotobackground" />
+
+        <ImageView
+            android:id="@+id/headphoto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/headphotobackground"
+            android:layout_alignEnd="@id/headphotobackground"
+            android:layout_alignLeft="@id/headphotobackground"
+            android:layout_alignRight="@id/headphotobackground"
+            android:layout_alignStart="@id/headphotobackground"
+            android:layout_alignTop="@id/headphotobackground"
+            android:contentDescription="@+string/headphoto"
+            android:padding="3dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/defheadphoto" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" >
+
+        <LinearLayout
+            android:id="@+id/logn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/enterbackground"
+            android:orientation="vertical" >
+
+            <EditText
+                android:id="@+id/username"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:background="#ffffff"
+                android:hint="@string/username_logn"
+                android:inputType="text"
+                android:padding="10dp"
+                android:singleLine="true" />
+
+            <View
+                android:id="@+id/separator"
+                android:layout_width="match_parent"
+                android:layout_height="2px"
+                android:background="#666" />
+
+            <EditText
+                android:id="@+id/password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:background="#ffffff"
+                android:hint="@string/password_logn"
+                android:inputType="textPassword"
+                android:padding="10dp"
+                android:singleLine="true" />
+        </LinearLayout>
+
+
+        <Button
+            android:id="@+id/submit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/logn"
+            android:layout_margin="15dp"
+            android:background="@drawable/submit_logn"
+            android:text="@string/submit_logn"
+            android:textColor="#ffffff"
+            android:contentDescription="@+string/submit" 
+            />
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/submit"
+            android:layout_centerHorizontal="true" >
+
+            <TextView
+                android:id="@+id/Fpwd"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginLeft="10dp"
+                android:layout_marginStart="10dp"
+                android:text="@string/forgetpwd_logn"
+                android:textColor="@android:color/white" />
+
+            <TextView
+                android:id="@+id/register"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@id/Fpwd"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="10dp"
+                android:layout_marginRight="10dp"
+                android:text="@string/register_logn"
+                android:textColor="@android:color/white" />
+        </RelativeLayout>
+    </RelativeLayout>
+
+</LinearLayout>

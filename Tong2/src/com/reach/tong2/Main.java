@@ -1,6 +1,7 @@
 package com.reach.tong2;
 
 import java.util.ArrayList;
+
 import databasefactory.DeleteContact;
 import databasefactory.ReadContact;
 import databasefactory.UpDataContact;
@@ -16,6 +17,8 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
+import android.view.Gravity;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
@@ -38,21 +41,9 @@ public class Main extends FragmentActivity implements OnClickListener {
 		// TODO Auto-generated method stub
 		super.onCreate(arg0);
 		setContentView(R.layout.main);
-		ReadContact temp = new ReadContact(this);
-		temp.getContact();
-//		 WriteExcel temp2 = new WriteExcel();
-//		 temp2.writeFile();
-		// add();
-		// WriteContact temp3 = new WriteContact(this);
-		// temp3.writeContact();
-		// UpDataContact temp4 = new UpDataContact(this, add());
-		// DeleteContact temp1 = new DeleteContact(this,
-		// DataManager.getAllPerson(DataManager.LOCAL).get(0));
-		// temp.getContact();
 		mFManager = getSupportFragmentManager();
 		init();
 	}
-
 
 	private Person add() {
 		Person person = new Person();
@@ -86,6 +77,15 @@ public class Main extends FragmentActivity implements OnClickListener {
 		}
 		transaction.commit();
 		setSelection(0);
+	}
+
+	@Override
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+		if (keyCode == KeyEvent.KEYCODE_BACK) {
+			moveTaskToBack(false);
+			return true;
+		}
+		return super.onKeyDown(keyCode, event);
 	}
 
 	private void setSelection(int index) {
@@ -130,17 +130,26 @@ public class Main extends FragmentActivity implements OnClickListener {
 	public View setActionBarLayout() {
 		ActionBar actionBar = this.getActionBar();
 		View view = null;
-		if (null != actionBar) {
-			actionBar.setDisplayShowHomeEnabled(false);
-			actionBar.setDisplayShowCustomEnabled(true);
-			LayoutInflater inflator = (LayoutInflater) this
-					.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-			view = inflator.inflate(R.layout.actionbar, null);
-			ActionBar.LayoutParams layout = new ActionBar.LayoutParams(
-					LayoutParams.FILL_PARENT, LayoutParams.FILL_PARENT);
-			actionBar.setCustomView(view, layout);
-		}
+		actionBar = this.getActionBar();
+		actionBar.setDisplayShowCustomEnabled(true);
+		actionBar.setDisplayShowHomeEnabled(false);
+		actionBar.setDisplayShowTitleEnabled(false);
+		view = getLayoutInflater().inflate(R.layout.actionbar, null);
+		actionBar.setCustomView(view, new ActionBar.LayoutParams(
+				LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
+		ActionBar.LayoutParams mP = (ActionBar.LayoutParams) view
+				.getLayoutParams();
+		mP.gravity = mP.gravity & ~Gravity.HORIZONTAL_GRAVITY_MASK
+				| Gravity.CENTER_HORIZONTAL;
+
+		actionBar.setCustomView(view, mP);
 		return view;
+	}
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		// TODO Auto-generated method stub
+		return super.onCreateOptionsMenu(menu);
 	}
 
 }
