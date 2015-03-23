@@ -35,12 +35,12 @@ public class Load extends Activity {
 			editor.putBoolean("isFrist", false);
 			editor.commit();
 			DataManager.frist();
-			target = "com.reach.tong2.Main";
+			target = "com.reach.tong2.Logn";
 		} else if (hasuser) {
 			target = "com.reach.tong2.Main";
 			DataManager.frist();
 		} else {
-			target = "com.reach.tong2.Main";
+			target = "com.reach.tong2.Logn";
 			DataManager.frist();
 		}
 		ReadContact temp = new ReadContact(this);
