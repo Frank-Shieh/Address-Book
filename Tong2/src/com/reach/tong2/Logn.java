@@ -162,7 +162,7 @@ public class Logn extends Activity implements OnClickListener {
 	@SuppressLint("SdCardPath")
 	private class Download extends Thread {
 
-		private String path = "/data/data/com.reach.share/user_";
+		private String path = getCacheDir().getParentFile()+"/user_";
 
 		@Override
 		public void run() {
@@ -186,7 +186,7 @@ public class Logn extends Activity implements OnClickListener {
 			URL url1 = null;
 
 			File target = new File(path);
-			path += "/headphoto.png";
+			path += "/headphoto_"+name+".png";
 			// this.path = path;
 			if (target.exists()) {
 				DataManager.setHeadphoto(path);

@@ -4,11 +4,13 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import customadapter.PersonalAadapter;
@@ -22,6 +24,7 @@ public class Personal extends Fragment implements OnItemClickListener {
 	private TextView mUserName;
 	private TextView mLocalFilesCount;
 	private TextView mNetFilesCount;
+	private ImageView mHeadPhoto;
 
 	@SuppressLint("InflateParams")
 	@Override
@@ -30,6 +33,7 @@ public class Personal extends Fragment implements OnItemClickListener {
 		// TODO Auto-generated method stub
 		View view = inflater.inflate(R.layout.personal, null);
 		mUserName = (TextView) view.findViewById(R.id.username_personal);
+		mHeadPhoto = (ImageView) view.findViewById(R.id.headphoto);
 		mLocalFilesCount = (TextView) view
 				.findViewById(R.id.localfile_personal);
 		mNetFilesCount = (TextView) view.findViewById(R.id.netfile_personal);
@@ -45,10 +49,16 @@ public class Personal extends Fragment implements OnItemClickListener {
 	}
 
 	private void setValueToView() {
-		if(DataManager.user != null)
-		mUserName.setText(this.getResources().getText(R.string.username_personal)+DataManager.user.getUsername());
+		if(DataManager.localFiles == null)
+			Log.i("file", "is null");
 		mLocalFilesCount.setText(this.getResources().getText(R.string.localfilescount_personal)
 				+ String.valueOf(DataManager.localFiles.getFilesCount()));
+		if(DataManager.user == null){
+			Log.i("file", "is null");
+			return;
+		}
+		mUserName.setText(this.getResources().getText(R.string.username_personal)+DataManager.user.getUsername());
+		mHeadPhoto.setImageBitmap(DataManager.getHeadphoto());
 	}
 
 	@Override

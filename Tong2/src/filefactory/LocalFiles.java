@@ -2,6 +2,8 @@ package filefactory;
 
 import java.io.File;
 
+import android.util.Log;
+
 import com.reach.tong2.DataManager;
 
 public class LocalFiles {
@@ -12,6 +14,7 @@ public class LocalFiles {
 		File temp = new File(DataManager.excelStorePath);
 		mFileName = temp.listFiles();
 		mFileCount = mFileName.length;
+		Log.i("localfile", "has read");
 	}
 	
 	public int getFilesCount(){

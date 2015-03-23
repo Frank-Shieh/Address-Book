@@ -20,6 +20,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -45,7 +46,6 @@ public class Register extends Activity implements OnClickListener,
 	private String mail;
 	private BmobFile file;
 	private Bitmap headphoto = null;
-	private boolean isserveron = false;
 	private boolean issex = false;
 	private User newuser;
 	private String headphotopath;
@@ -53,6 +53,7 @@ public class Register extends Activity implements OnClickListener,
 	private static final int FROMCCAMERA = -2;
 	private static final int IMAGE_REQUEST_CODE = 0;
 	private static final int CAMERA_REQUEST_CODE = 1;
+	private InputMethodManager imm;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -63,6 +64,7 @@ public class Register extends Activity implements OnClickListener,
 	}
 
 	private void init() {
+		imm = (InputMethodManager) getSystemService(Logn.INPUT_METHOD_SERVICE);
 		submit = (Button) findViewById(R.id.regsubmit);
 		submit.setOnClickListener(this);
 		photo = (ImageView) findViewById(R.id.headphoto);
@@ -102,11 +104,19 @@ public class Register extends Activity implements OnClickListener,
 			password = pwd.getText().toString();
 			temppwd = compwd.getText().toString();
 			mail = email.getText().toString();
+			if (imm != null) {
+				imm.hideSoftInputFromWindow(getWindow().getDecorView()
+						.getWindowToken(), 0);
+			}
 			if (check())
 				regist();
 		}
 			break;
 		case R.id.headphoto: {
+			if (imm != null) {
+				imm.hideSoftInputFromWindow(getWindow().getDecorView()
+						.getWindowToken(), 0);
+			}
 			showdialog();
 		}
 			break;
@@ -187,11 +197,6 @@ public class Register extends Activity implements OnClickListener,
 		if (username.length() == 0 || password.length() == 0
 				|| temppwd.length() == 0 || mail.length() == 0 || !issex) {
 			Toast.makeText(Register.this, "请完整填写信息", Toast.LENGTH_SHORT).show();
-			return false;
-		}
-		// 接受协议
-		if (!isserveron) {
-			Toast.makeText(Register.this, "是否接受协议", Toast.LENGTH_SHORT).show();
 			return false;
 		}
 		// 验证用户名有效性

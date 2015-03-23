@@ -3,8 +3,8 @@ package com.reach.tong2;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
-
 import user.User;
+import android.annotation.SuppressLint;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Environment;
@@ -44,11 +44,12 @@ public class DataManager {
 		temp = new File(excelStorePath + "/Tong");
 		if (!temp.exists())
 			temp.mkdirs();
-		excelStorePath = temp.toString();
-		Log.i("path", excelStorePath);
+		excelStorePath = temp.getAbsolutePath();
+		Log.i("excelStorepath", excelStorePath);
 		init();
 	}
 
+	@SuppressLint("SdCardPath")
 	public static void init() {
 		chToMath.put(PHONETYPE[0],
 				ContactsContract.CommonDataKinds.Phone.TYPE_MOBILE);
@@ -77,10 +78,10 @@ public class DataManager {
 		}
 		localFiles = new LocalFiles();
 		if (user != null) {
-			userpath = "/data/data/com.reach.share/user_" + user.getUsername();
+			userpath = "/data/data/com.reach.tong2/user_" + user.getUsername();
 			File file = new File(userpath);
 			if (file.exists())
-				setHeadphoto(userpath + "/headphoto.png");
+				setHeadphoto(userpath + "/headphoto_"+user.getUsername()+".png");
 		}
 	}
 

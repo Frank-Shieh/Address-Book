@@ -43,11 +43,11 @@ public class Load extends Activity {
 			target = "com.reach.tong2.Logn";
 			DataManager.frist();
 		}
-		ReadContact temp = new ReadContact(this);
-		temp.getContact();
 		tt = new TimerTask() {
 			@Override
 			public void run() {
+				ReadContact temp = new ReadContact(Load.this);
+				temp.getContact();
 				Intent intent = new Intent(target);
 				startActivity(intent);
 				finish();
