@@ -54,6 +54,7 @@ public class Register extends Activity implements OnClickListener,
 	private static final int IMAGE_REQUEST_CODE = 0;
 	private static final int CAMERA_REQUEST_CODE = 1;
 	private InputMethodManager imm;
+	private boolean mIsPress = true;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -100,6 +101,9 @@ public class Register extends Activity implements OnClickListener,
 		// TODO Auto-generated method stub
 		switch (v.getId()) {
 		case R.id.regsubmit: {
+			if(!mIsPress)
+				break;
+			
 			username = usrname.getText().toString();
 			password = pwd.getText().toString();
 			temppwd = compwd.getText().toString();
@@ -108,8 +112,12 @@ public class Register extends Activity implements OnClickListener,
 				imm.hideSoftInputFromWindow(getWindow().getDecorView()
 						.getWindowToken(), 0);
 			}
-			if (check())
+			if (check()){
+				mIsPress = false;
 				regist();
+			}
+			else
+				mIsPress = true;
 		}
 			break;
 		case R.id.headphoto: {
@@ -179,6 +187,7 @@ public class Register extends Activity implements OnClickListener,
 //						Datamanager.getErrorCode((Integer) arg0),
 //						Toast.LENGTH_SHORT).show();
 				Log.i("registe", "fail"+arg1);
+				mIsPress = true;
 			}
 		});
 	}
@@ -268,7 +277,7 @@ public class Register extends Activity implements OnClickListener,
 		BufferedOutputStream bos = null;
 		try {
 			bos = new BufferedOutputStream(new FileOutputStream(headphotopath));
-			photo.compress(Bitmap.CompressFormat.PNG, 100, bos);// (0 - 100)压缩文件
+			photo.compress(Bitmap.CompressFormat.PNG, 50, bos);// (0 - 100)压缩文件
 			bos.flush();
 		} catch (Exception e) {
 			e.printStackTrace();

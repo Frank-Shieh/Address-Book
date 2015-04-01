@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+    <item 
+        android:id="@+id/delete_batchdelete"
+        android:title="@string/delete_personalinfo"
+        android:icon="@drawable/icon_delete"
+        android:showAsAction="always"
+        />
+
+</menu>

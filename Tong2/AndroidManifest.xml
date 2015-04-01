@@ -107,6 +107,48 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".UserInfo"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="com.reach.tong2.UserInfo" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".BatchSelect"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="com.reach.tong2.BatchSelect" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".ChoiseSources"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="com.reach.tong2.ChoiseSources" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".NewPerson"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="com.reach.tong2.NewPerson" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+<!--                         <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter> -->
+            
+        </activity>
+        <activity
             android:name=".Headphotoget"
             android:label="@string/app_name" >
             <intent-filter>

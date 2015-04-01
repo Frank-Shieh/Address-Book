@@ -22,6 +22,22 @@
     <string name="sex_female">女</string>
     <string name="register_register">用户注册</string>
     <string name="submit_register">立即注册</string>
-    
-
+    <string name="delete_personalinfo">删除联系人</string>
+    <string name="add_person">添加联系人</string>
+    <string name="selectall">全选</string>
+    <string name="newperson_fristname">姓氏：</string>
+    <string name="newperson_secondname">名字：</string>
+    <string name="newperson_phone">电话</string>
+    <string name="newperson_email">电子邮件</string>
+    <string name="newperson_address">地址</string>
+	
+	<string-array name="openfile_dialog_show">
+	    <item >新建联系人</item>
+	    <item >编辑联系人</item>
+	    <item >导入联系人</item>
+	</string-array>
+	<string-array name="choisesources">
+	    <item >本地联系人</item>
+	    <item >本地文件</item>
+	</string-array>
 </resources>

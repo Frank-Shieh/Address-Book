@@ -1,12 +1,14 @@
 package databasefactory;
 
+import java.io.ByteArrayInputStream;
 import java.io.InputStream;
-
 import java.util.ArrayList;
 
 import com.reach.tong2.DataManager;
 import com.reach.tong2.Person;
 
+import datacontrol.Add;
+import datatypetransation.Transation;
 import android.content.ContentResolver;
 import android.content.ContentUris;
 import android.content.Context;
@@ -15,6 +17,8 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.provider.ContactsContract;
+import android.provider.ContactsContract.Contacts.Photo;
+import android.util.Log;
 
 public class ReadContact {
 
@@ -26,17 +30,7 @@ public class ReadContact {
 	private int mID;
 	private Uri mHeadPhotoUri;
 	private InputStream mInputStream;
-	private static String EMAIL_V2 = "vnd.android.cursor.item/email_v2";
-	private static String IM = "vnd.android.cursor.item/im";
-	private static String NICKNAME = "vnd.android.cursor.item/nickname";
-	private static String ORGANIZATION = "vnd.android.cursor.item/organization";
-	private static String PHONE_V2 = "vnd.android.cursor.item/phone_v2";
-	private static String SIP_ADDRESS = "vnd.android.cursor.item/sip_address";
-	private static String NAME = "vnd.android.cursor.item/name";
-	private static String POSTALADDRESS_V2 = "vnd.android.cursor.item/postal-address_v2";
-	private static String IDENTITY = "vnd.android.cursor.item/identity";
-	private static String PHOTO = "vnd.android.cursor.item/photo";
-	private static String GROUP_MENMBERSHIP = "vnd.android.cursor.item/group_membership";
+	private Add mAdd = new Add();
 
 	public ReadContact() {
 
@@ -65,100 +59,56 @@ public class ReadContact {
 			mCursorPerson = mResolver.query(ContactsContract.Data.CONTENT_URI,
 					projection, selection, selectionArgs, null);
 			getDataByPerson();
-			if (mPerson.mIsFull)
-				DataManager.addPerson(DataManager.LOCAL, mPerson);
+			if (mPerson.mIsFull) {
+				mAdd.add(DataManager.RequestCode.SrcCode.SRC_LOCAL, mPerson);
+				mPerson.mIsFull = false;
+			}
+
 		}
 	}
 
 	private void getDataByPerson() {
 		boolean temp1 = false;
 		boolean temp2 = false;
+		Transation temp = null;
 		while (mCursorPerson.moveToNext()) {
-			
 			String data = mCursorPerson.getString(mCursorPerson
 					.getColumnIndex("data1"));
 			String mimeType = mCursorPerson.getString(mCursorPerson
 					.getColumnIndex("mimetype"));
-			int type = mCursorPerson.getInt(mCursorPerson
+			int data2 = mCursorPerson.getInt(mCursorPerson
 					.getColumnIndex("data2"));
 			ArrayList<String> target = null;
-			int index = 0;
-			switch (checkType(mimeType)) {
-			case 1:
-				index = DataManager.getIndex(1, type);
-				target = mPerson.getEmail(index);
-				if (target == null) {
-					target = new ArrayList<String>();
-					target.add(data);
-					mPerson.addEmail(target, index);
-				}
-				else
-				target.add(data);
-				target = null;
-				temp2 = true;
-				break;
-			case 5:
-				index = DataManager.getIndex(5, type);
-				target = mPerson.getPhone(index);
-				if (target == null) {
-					target = new ArrayList<String>();
-					target.add(data);
-					mPerson.addPhone(target, index);
-				}
-				else
-				target.add(data);
-				target = null;
-				temp2 = true;
-				break;
-			case 7:
+			temp = new Transation(mimeType, data2);
+			if (temp.getFamily() == 10) {
+				getHeadPhoto();
+			} else if (temp.getFamily() == 7) {
 				mPerson.addName(data);
 				temp1 = true;
-				break;
-			case 8:
-				index = DataManager.getIndex(8, type);
-				target = mPerson.getPostAddress(index);
+			} else {
+				target = mPerson.getData(temp.getFamily(), temp.getType());
 				if (target == null) {
 					target = new ArrayList<String>();
 					target.add(data);
-					mPerson.addAddress(target, index);
-				}
-				else
-				target.add(data);
-				target = null;
+					mPerson.addData(temp.getFamily(), temp.getType(), target);
+				} else
+					target.add(data);
 				temp2 = true;
-				break;
-			case 10:
-				getHeadPhoto();
-				break;
-			default:
-				break;
+				target = null;
 			}
 		}
-		mPerson.mIsFull = temp1&&temp2;
-	}
-
-	private int checkType(String type) {
-		if (type.equals(EMAIL_V2))
-			return 1;
-		if (type.equals(PHONE_V2))
-			return 5;
-		if (type.equals(NAME))
-			return 7;
-		if (type.equals(POSTALADDRESS_V2))
-			return 8;
-		if (type.equals(PHOTO))
-			return 10;
-		return 0;
+		mPerson.mIsFull = temp1 && temp2;
 	}
 
 	private void getHeadPhoto() {
 		Bitmap temp = null;
 		mHeadPhotoUri = ContentUris.withAppendedId(
 				ContactsContract.Contacts.CONTENT_URI, mID);
+		System.out.println(mHeadPhotoUri.toString());
 		mInputStream = ContactsContract.Contacts.openContactPhotoInputStream(
 				mResolver, mHeadPhotoUri);
 		temp = BitmapFactory.decodeStream(mInputStream);
 		mPerson.addHeadPhoto(temp);
-	}
 
+	}
 }

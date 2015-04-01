@@ -3,6 +3,7 @@ package com.reach.tong2;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
+import datacontrol.Delete;
 import user.User;
 import android.annotation.SuppressLint;
 import android.graphics.Bitmap;
@@ -16,28 +17,21 @@ public class DataManager {
 
 	public static ArrayList<Person> mListExcel;
 	private static ArrayList<Person> mListLocal = new ArrayList<Person>();
-	private static ArrayList<Person> mListTemp = new ArrayList<Person>();
+	public static ArrayList<Person> mListTemp;
 	public static HashMap<String, Integer> chToMath = new HashMap<String, Integer>();
-	public static HashMap<String, Integer> phonePosition = new HashMap<String, Integer>();
-	public static HashMap<String, Integer> emailPosition = new HashMap<String, Integer>();
-	public static HashMap<String, Integer> addressPosition = new HashMap<String, Integer>();
 	public static String excelStorePath;
-	public static final int EXCEL = 1;
-	public static final int LOCAL = 2;
-	public static final int TEMP = 3;
 	public static final String[] PHONETYPE = { "移动号码", "家庭号码", "其他号码" };
 	public static final String[] EMAILTYPE = { "家庭邮件", "工作邮件" };
 	public static final String[] ADDRESSTYPE = { "家庭地址", "工作地址", "其他地址" };
 	public static Person targetPerson;
 	public static LocalFiles localFiles;
 	public static User user;
-	private static String userpath;
+	public static String userpath;
 	private static Bitmap head;
-
-	// static{
-	// frist();
-	// }
-
+	public static String APPPath;
+	public static String targetFile;
+	public static String persentfilename;
+	
 	public static void frist() {
 		File temp;
 		excelStorePath = Environment.getExternalStorageDirectory().toString();
@@ -45,7 +39,8 @@ public class DataManager {
 		if (!temp.exists())
 			temp.mkdirs();
 		excelStorePath = temp.getAbsolutePath();
-		Log.i("excelStorepath", excelStorePath);
+		Log.i("apppath", APPPath);
+		targetFile = APPPath + "/tamplate.xls";
 		init();
 	}
 
@@ -67,86 +62,62 @@ public class DataManager {
 				ContactsContract.CommonDataKinds.StructuredPostal.TYPE_WORK);
 		chToMath.put(ADDRESSTYPE[2],
 				ContactsContract.CommonDataKinds.StructuredPostal.TYPE_CUSTOM);
-		for (int i = 0; i < PHONETYPE.length; i++) {
-			phonePosition.put(PHONETYPE[i], i);
-		}
-		for (int i = 0; i < EMAILTYPE.length; i++) {
-			emailPosition.put(EMAILTYPE[i], i);
-		}
-		for (int i = 0; i < ADDRESSTYPE.length; i++) {
-			addressPosition.put(ADDRESSTYPE[i], i);
-		}
 		localFiles = new LocalFiles();
 		if (user != null) {
 			userpath = "/data/data/com.reach.tong2/user_" + user.getUsername();
 			File file = new File(userpath);
 			if (file.exists())
-				setHeadphoto(userpath + "/headphoto_"+user.getUsername()+".png");
+				setHeadphoto(userpath + "/headphoto_" + user.getUsername()
+						+ ".png");
 		}
 	}
 
-	public static void addPerson(int model, Person person) {
+	public static ArrayList<Person> addParent(int model) {
 		switch (model) {
-		case EXCEL:
-			mListExcel.add(person);
-			break;
-		case LOCAL:
-			mListLocal.add(person);
-			break;
-		case TEMP:
-			mListTemp.add(person);
-		default:
-			break;
+		case RequestCode.SrcCode.SRC_EXCEL:
+			return mListExcel;
+		case RequestCode.SrcCode.SRC_LOCAL:
+			return mListLocal;
+		case RequestCode.SrcCode.SRC_TEMP:
+			return mListTemp;
 		}
+		return null;
+	}
+
+	public static ArrayList<Person> deleteParent(int model) {
+		switch (model) {
+		case RequestCode.SrcCode.SRC_EXCEL:
+			return mListExcel;
+		case RequestCode.SrcCode.SRC_LOCAL:
+			return mListLocal;
+		case RequestCode.SrcCode.SRC_TEMP:
+			return mListTemp;
+		}
+		return null;
 	}
 
 	public static ArrayList<Person> getAllPerson(int model) {
 		switch (model) {
-		case EXCEL:
+		case RequestCode.SrcCode.SRC_EXCEL:
 			return mListExcel;
-		case LOCAL:
+		case RequestCode.SrcCode.SRC_LOCAL:
 			return mListLocal;
-		case TEMP:
+		case RequestCode.SrcCode.SRC_TEMP:
 			return mListTemp;
 		default:
 			return null;
 		}
 	}
 
-	public static int getIndex(int type, int type1) {
-		switch (type) {
-		case 1:
-			switch (type1) {
-			case ContactsContract.CommonDataKinds.Email.TYPE_HOME:
-				return emailPosition.get("家庭邮件");
-			case ContactsContract.CommonDataKinds.Email.TYPE_WORK:
-				return emailPosition.get("工作邮件");
-			}
-		case 5:
-			switch (type1) {
-			case ContactsContract.CommonDataKinds.Phone.TYPE_MOBILE:
-				return phonePosition.get("移动号码");
-			case ContactsContract.CommonDataKinds.Phone.TYPE_HOME:
-				return phonePosition.get("家庭号码");
-			case ContactsContract.CommonDataKinds.Phone.TYPE_CUSTOM:
-				return phonePosition.get("其他号码");
-			}
-		case 8:
-			switch (type1) {
-			case ContactsContract.CommonDataKinds.StructuredPostal.TYPE_HOME:
-				return addressPosition.get("家庭地址");
-			case ContactsContract.CommonDataKinds.StructuredPostal.TYPE_WORK:
-				return addressPosition.get("工作地址");
-			case ContactsContract.CommonDataKinds.StructuredPostal.TYPE_CUSTOM:
-				return addressPosition.get("其他地址");
-			}
-		}
-		return -1;
-	}
-
 	public static class TargetPerson {
 		public static ArrayList<String> mData;
 		public static ArrayList<String> mType;
+	}
+
+	public class FamilyType {
+		public static final int FAMILY_PHONE = 1;
+		public static final int FAMILY_EMAIL = 2;
+		public static final int FAMILY_ADDRESS = 3;
 	}
 
 	public class MimeType {
@@ -163,6 +134,36 @@ public class DataManager {
 		public static final String GROUP_MENMBERSHIP = "vnd.android.cursor.item/group_membership";
 
 	}
+
+	public class RequestCode {
+		public class SrcCode {
+			public static final String REQUESTCODE_SRC = "requsecode_src";
+			public static final int SRC_EXCEL = 1;
+			public static final int SRC_LOCAL = 2;
+			public static final int SRC_TEMP = 3;
+		}
+
+		public class DstCode {
+			public static final String REQUESTCODE_DST = "requsecode_dst";
+			public static final int DST_EXCEL = 1;
+			public static final int DST_LOCAL = 2;
+			public static final int DST_TEMP = 3;
+		}
+		
+	}
+
+	public class ActionCode {
+		public static final String ACTIONCODE = "actioncode";
+		public static final int DELETE = 1;
+		public static final int ADD = 2;
+		public static final int VISIT = 0;
+	}
+
+	// public class Model {
+	// public static final int EXCEL = 1;
+	// public static final int LOCAL = 2;
+	// public static final int TEMP = 3;
+	// }
 
 	// 设置和获取头像
 	public static void setHeadphoto(String headphoto) {

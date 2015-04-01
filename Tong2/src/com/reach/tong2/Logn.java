@@ -9,6 +9,7 @@ import java.net.URL;
 import user.User;
 import cn.bmob.v3.BmobUser;
 import cn.bmob.v3.listener.SaveListener;
+import filefactory.FileTamplate;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
@@ -170,6 +171,8 @@ public class Logn extends Activity implements OnClickListener {
 			super.run();
 			DataManager.user = BmobUser.getCurrentUser(Logn.this, User.class);
 			String path = this.path + name;
+			File temp = new File(path);
+			temp.mkdirs();
 			String url = null;
 			if (DataManager.user.getHeadphoto() != null) {
 				url = DataManager.user.getHeadphoto().getFileUrl(Logn.this);

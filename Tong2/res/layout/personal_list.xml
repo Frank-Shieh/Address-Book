@@ -17,7 +17,6 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/separator1"
         android:padding="10dp"
-        android:text="temp"
         android:textSize="20sp"
         android:layout_centerVertical="true"
         />
@@ -28,14 +27,8 @@
         android:layout_alignTop="@id/textname"
         android:layout_alignBottom="@id/textname"
         android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
         android:layout_marginRight="10dp"
+        android:layout_marginEnd="10dp"
         />
-    
-    <View 
-        android:layout_width="match_parent"
-        android:layout_height="1px"
-        android:layout_below="@id/textname"
-        android:background="#666"/>
-    
-
 </RelativeLayout>

@@ -15,12 +15,41 @@ public class Person {
 	private Bitmap mHeadPhoto;
 	private HashMap<Integer, ArrayList<String>> mPostAddress = new HashMap<Integer, ArrayList<String>>();
 	public boolean mIsFull;
+	
 	public String mHasheadphoto = new String("no");
 
 	public Person() {
 		
 	}
-
+	
+	public void addData(int family, int type, ArrayList<String> value){
+		switch (family) {
+		case DataManager.FamilyType.FAMILY_PHONE:
+			mPhone.put(type, value);
+			break;
+		case DataManager.FamilyType.FAMILY_EMAIL:
+			mEmail.put(type, value);
+			break;
+		case DataManager.FamilyType.FAMILY_ADDRESS:
+			mPostAddress.put(type, value);
+			break;
+		default:
+			break;
+		}
+	}
+	
+	public ArrayList<String> getData(int family, int type){
+		switch (family) {
+		case DataManager.FamilyType.FAMILY_PHONE:
+			return mPhone.get(type);
+		case DataManager.FamilyType.FAMILY_EMAIL:
+			return mEmail.get(type);
+		case DataManager.FamilyType.FAMILY_ADDRESS:
+			return mPostAddress.get(type);
+		}
+		return null;
+	}
+	
 	public void addPhone(ArrayList<String> value, int index) {
 		mPhone.put(index, value);
 	}

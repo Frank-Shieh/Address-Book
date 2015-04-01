@@ -96,6 +96,10 @@
         android:dividerHeight="0px" >
     </ListView>
 
+    <View 
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="#666"/>
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

@@ -1,7 +1,6 @@
 package filefactory;
 
 import java.io.ByteArrayOutputStream;
-import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -15,8 +14,6 @@ import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 
 import android.graphics.Bitmap;
-import android.util.Log;
-
 import com.reach.tong2.DataManager;
 import com.reach.tong2.Person;
 
@@ -29,56 +26,51 @@ public class WriteExcel extends FileWrite {
 	private HSSFSheet mSheet;
 	private int mIndex = 0;
 	private HSSFCellStyle mStyle;
+	private int mRowIndex;
+	private String mFileName = "test1.xls";
 
-	public WriteExcel() {
+	public WriteExcel(int model) {
 		// TODO Auto-generated constructor stub
-		mPersons = DataManager.getAllPerson(DataManager.LOCAL);
+		mPersons = DataManager.getAllPerson(model);
+		ReadFile temp = new ReadFile();
+		mWorkBook = temp.readFile(mWorkBook);
+	}
+
+	public WriteExcel(int model, String name) {
+		mPersons = DataManager.getAllPerson(model);
+		mFileName = name;
+		ReadFile temp = null;
+		temp = new ReadFile();
+		mWorkBook = temp.readFile(mWorkBook);
+	}
+
+	public WriteExcel(int model, String name, boolean append) {
+		mPersons = DataManager.getAllPerson(model);
+		ReadFile temp = null;
+		if (append)
+			temp = new ReadFile(name);
+		else
+			temp = new ReadFile();
+		mWorkBook = temp.readFile(mWorkBook);
 	}
 
 	@Override
 	public void writeFile() {
 		// TODO Auto-generated method stub
-		mWorkBook = new HSSFWorkbook();
-		mSheet = mWorkBook.createSheet("sheet1");
-		createHeader();
+		mSheet = mWorkBook.getSheet("sheet1");
+		mRowIndex = mSheet.getLastRowNum() + 1;
+		mStyle = mWorkBook.createCellStyle();
 		putData();
 		writeExcel();
-	}
-
-	private void createHeader() {
-		mRow = mSheet.createRow(0);
-		mStyle = mWorkBook.createCellStyle();
-		mStyle.setAlignment(HSSFCellStyle.ALIGN_CENTER);
-		mCell = mRow.createCell(mIndex++);
-		mCell.setCellValue("姓名");
-		mCell.setCellStyle(mStyle);
-		for (int i = 0; i < DataManager.PHONETYPE.length; mIndex++, i++) {
-			mCell = mRow.createCell(mIndex);
-			mCell.setCellValue(DataManager.PHONETYPE[i]);
-			mCell.setCellStyle(mStyle);
-		}
-		for (int i = 0; i < DataManager.EMAILTYPE.length; mIndex++, i++) {
-			mCell = mRow.createCell(mIndex);
-			mCell.setCellValue(DataManager.EMAILTYPE[i]);
-			mCell.setCellStyle(mStyle);
-		}
-		for (int i = 0; i < DataManager.ADDRESSTYPE.length; i++, mIndex++) {
-			mCell = mRow.createCell(mIndex);
-			mCell.setCellValue(DataManager.ADDRESSTYPE[i]);
-			mCell.setCellStyle(mStyle);
-		}
-		mCell = mRow.createCell(mIndex);
-		mCell.setCellValue("头像");
-		mCell.setCellStyle(mStyle);
-		mIndex = 0;
 	}
 
 	private void putData() {
 		ByteArrayOutputStream baos = null;
 		mStyle.setAlignment(HSSFCellStyle.ALIGN_JUSTIFY);
-		for (int i = 1; i <= mPersons.size(); i++, mIndex = 0) {
-			mRow = mSheet.createRow(i);
-			Person person = mPersons.get(i - 1);
+
+		for (int i = 0; i < mPersons.size(); i++, mIndex = 0, mRowIndex++) {
+			mRow = mSheet.createRow(mRowIndex);
+			Person person = mPersons.get(i);
 			mCell = mRow.createCell(mIndex++);
 			mCell.setCellStyle(mStyle);
 			mCell.setCellValue(person.getName());
@@ -88,11 +80,12 @@ public class WriteExcel extends FileWrite {
 					continue;
 				mCell = mRow.createCell(mIndex);
 				mCell.setCellStyle(mStyle);
-				Log.i("target size", String.valueOf(target.size()));
-				if (target.size() == 1) {
-					mCell.setCellValue(formatPhone(target.get(0)));
-				} else {
+				StringBuffer temp = new StringBuffer();
+				for (int k = 0; k < target.size(); k++) {
+					temp.append(formatPhone(target.get(k)) + ";");
 				}
+				if (temp.length() != 0)
+					mCell.setCellValue(temp.toString());
 			}
 			for (int j = 0; j < DataManager.EMAILTYPE.length; j++, mIndex++) {
 				ArrayList<String> target = person.getEmail(j);
@@ -100,10 +93,12 @@ public class WriteExcel extends FileWrite {
 					continue;
 				mCell = mRow.createCell(mIndex);
 				mCell.setCellStyle(mStyle);
-				if (target.size() == 1) {
-					mCell.setCellValue(target.get(0));
-				} else {
+				StringBuffer temp = new StringBuffer();
+				for (int k = 0; k < target.size(); k++) {
+					temp.append(target.get(k) + ";");
 				}
+				if (temp.length() != 0)
+					mCell.setCellValue(temp.toString());
 			}
 			for (int j = 0; j < DataManager.ADDRESSTYPE.length; j++, mIndex++) {
 				ArrayList<String> target = person.getPostAddress(j);
@@ -111,10 +106,12 @@ public class WriteExcel extends FileWrite {
 					continue;
 				mCell = mRow.createCell(mIndex);
 				mCell.setCellStyle(mStyle);
-				if (target.size() == 1) {
-					mCell.setCellValue(target.get(0));
-				} else {
+				StringBuffer temp = new StringBuffer();
+				for (int k = 0; k < target.size(); k++) {
+					temp.append(target.get(k) + ";");
 				}
+				if (temp.length() != 0)
+					mCell.setCellValue(temp.toString());
 			}
 			/**
 			 * 写入头像
@@ -126,21 +123,22 @@ public class WriteExcel extends FileWrite {
 						baos);
 				HSSFPatriarch patriarch = mSheet.createDrawingPatriarch();
 				HSSFClientAnchor anchor = new HSSFClientAnchor(0, 0, 512, 255,
-						(short) mIndex, i, (short) mIndex, i);
+						(short) mIndex, mRowIndex, (short) mIndex, mRowIndex);
 				anchor.setAnchorType(HSSFClientAnchor.MOVE_AND_RESIZE);
 				patriarch.createPicture(anchor, mWorkBook.addPicture(
 						baos.toByteArray(), HSSFWorkbook.PICTURE_TYPE_PNG));
 				mCell.setCellValue("yes");
-			}else
+			} else
 				mCell.setCellValue("no");
-			
+
 		}
 	}
 
 	private void writeExcel() {
 		FileOutputStream fos = null;
 		try {
-			fos = new FileOutputStream(DataManager.excelStorePath+"/test1.xls");
+			fos = new FileOutputStream(DataManager.excelStorePath + "/"
+					+ mFileName);
 			mWorkBook.write(fos);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -160,7 +158,8 @@ public class WriteExcel extends FileWrite {
 
 		StringBuffer temp = new StringBuffer(target);
 		for (int i = 0; i < temp.length(); i++) {
-			if (temp.charAt(i) < '0' || temp.charAt(i) > '9')
+			if (temp.charAt(i) < '0' || temp.charAt(i) > '9'
+					|| temp.charAt(i) == ' ')
 				temp.deleteCharAt(i);
 		}
 		return temp.toString();

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="mainpage_dialog_show">
+        <item>新建联系人</item>
+        <item>编辑联系人</item>
+        <item>导出联系人</item>
+        <item>导入联系人</item>
+    </string-array>
+    <string name="mainpage_menu_create">新建联系人</string>
+    <string name="mainpage_menu_edit">编辑联系人</string>
+    <string name="mainpage_menu_output">导出联系人</string>
+    <string name="mainpage_menu_input">导入联系人</string>
+
+    <string name="mainpage_dialog_choiseone">请选择一项</string>
+    <string name="mainpage_dialog_entername">请输入文件名</string>
+    <string name="mainpage_dialog_filename">文件名：</string>
+    <string name="mainpage_dialog_yesbutton">确定</string>
+    <string name="mainpage_dialog_nobutton">取消</string>
+
+</resources>

@@ -100,6 +100,7 @@ public class InsetPerson {
 	private void insetHeadPhoto(Person target){
 		//Ìí¼ÓÍ·Ïñ
 		mValues.put("raw_contact_id", mID);
+		mValues.put("data14", 1);
 		mValues.put(ContactsContract.Data.MIMETYPE, DataManager.MimeType.PHOTO);
 		ByteArrayOutputStream os = new ByteArrayOutputStream();
 		Bitmap temp = target.getHeadPhoto();
@@ -107,6 +108,5 @@ public class InsetPerson {
 		mValues.put(Photo.PHOTO, os.toByteArray());
 		mResolver.insert(uri, mValues);
 		mValues.clear();
-
 	}
 }

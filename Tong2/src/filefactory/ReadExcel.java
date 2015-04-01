@@ -1,8 +1,5 @@
 package filefactory;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,6 +16,9 @@ import android.util.Log;
 import com.reach.tong2.DataManager;
 import com.reach.tong2.Person;
 
+import datacontrol.Add;
+import datatypetransation.Transation;
+
 public class ReadExcel extends FileRead {
 
 	private String mfileName;
@@ -30,6 +30,7 @@ public class ReadExcel extends FileRead {
 	private int mHeadphotoposition = 0;
 	private int mEmailPosition;
 	private int mAddressPosition;
+	private Add mAdd = new Add();
 	private List<HSSFPictureData> mList;
 	private DecimalFormat mformat = new DecimalFormat("0"); // 转换从excel得到的数值类型的数据格式
 
@@ -42,26 +43,10 @@ public class ReadExcel extends FileRead {
 	@Override
 	public void readFile() {
 		// TODO Auto-generated method stub
-		FileInputStream fileInputStream = null;
-		try {
-			fileInputStream = new FileInputStream(new File(mfileName));
-			mworkBook = new HSSFWorkbook(fileInputStream);
-			msheetCount = mworkBook.getNumberOfSheets();
-			getDataFromSheet();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} finally {
-			if (fileInputStream != null) {
-				try {
-					fileInputStream.close();
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-					// Log.i("IOException:", "IO close exception");
-				}
-			}
-		}
+		ReadFile temp = new ReadFile(mfileName);
+		mworkBook = temp.readFile(mworkBook);
+		msheetCount = mworkBook.getNumberOfSheets();
+		getDataFromSheet();
 	}
 
 	/**
@@ -86,8 +71,7 @@ public class ReadExcel extends FileRead {
 					getCellData(cellCount);
 				}
 				getHeadPhoto(rowCount);
-				DataManager.addPerson(DataManager.EXCEL, mperson);
-
+				mAdd.add(DataManager.RequestCode.SrcCode.SRC_EXCEL, mperson);
 			}
 		}
 	}
@@ -119,29 +103,21 @@ public class ReadExcel extends FileRead {
 	 */
 	private void getCellData(short cellIndex) {
 		ArrayList<String> target = new ArrayList<String>();
+		Transation temp = new Transation(mtitle[cellIndex]);
 		switch (mcell.getCellType()) {
 		case HSSFCell.CELL_TYPE_NUMERIC: // double型的数字
 			target.add(mformat.format(mcell.getNumericCellValue()));
-			// if(cellIndex>=mAddressPosition)
-			// Log.i("phone2", mformat.format(mcell.getNumericCellValue()));
-			mperson.addPhone(target,
-					DataManager.phonePosition.get(mtitle[cellIndex]));
+			temp = new Transation(mtitle[cellIndex]);
+			mperson.addData(temp.getFamily(), temp.getType(), target);
 			break;
 		case HSSFCell.CELL_TYPE_STRING: // 字符串
-			target.add(mcell.getStringCellValue());
+			dealWithStrings(mcell.getStringCellValue(), target);
 			if (cellIndex == mAddressPosition + DataManager.ADDRESSTYPE.length)
 				mperson.mHasheadphoto = mcell.getStringCellValue();
-			else if (cellIndex >= mAddressPosition)
-				mperson.addAddress(target,
-						DataManager.addressPosition.get(mtitle[cellIndex]));
-			else if (cellIndex >= mEmailPosition)
-				mperson.addEmail(target,
-						DataManager.emailPosition.get(mtitle[cellIndex]));
 			else if (cellIndex == 0)
 				mperson.addName(mcell.getStringCellValue());
 			else
-				mperson.addPhone(target,
-						DataManager.phonePosition.get(mtitle[cellIndex]));
+				mperson.addData(temp.getFamily(), temp.getType(), target);
 			break;
 		case HSSFCell.CELL_TYPE_BOOLEAN: // 布尔值
 			mcell.getBooleanCellValue();
@@ -171,6 +147,16 @@ public class ReadExcel extends FileRead {
 			mperson.addHeadPhoto(BitmapFactory.decodeByteArray(data, 0,
 					data.length));
 		}
+	}
+
+	private void dealWithStrings(String target, ArrayList<String> context) {
+
+		String[] temp = null;
+		temp = target.split(";");
+		for (int i = 0; i < temp.length; i++) {
+			context.add(temp[i]);
+		}
+
 	}
 
 }

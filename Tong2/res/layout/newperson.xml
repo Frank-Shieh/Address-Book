@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#ffffff"
+        android:padding="10dp" >
+
+        <ImageView
+            android:id="@+id/newperson_defheadphoto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/defheadphoto_personal" />
+
+        <ImageView
+            android:id="@+id/newperson_headphoto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/newperson_defheadphoto"
+            android:layout_alignEnd="@id/newperson_defheadphoto"
+            android:layout_alignLeft="@id/newperson_defheadphoto"
+            android:layout_alignRight="@id/newperson_defheadphoto"
+            android:layout_alignStart="@id/newperson_defheadphoto"
+            android:layout_alignTop="@id/newperson_defheadphoto" />
+
+        <TextView
+            android:id="@+id/newperson_fristname_temp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="15dp"
+            android:layout_toEndOf="@id/newperson_defheadphoto"
+            android:layout_toRightOf="@id/newperson_defheadphoto"
+            android:text="@string/newperson_fristname"
+            android:textColor="#000000"
+            android:textSize="20sp" />
+
+        <EditText
+            android:id="@+id/newperson_fristname"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/newperson_fristname_temp"
+            android:layout_toEndOf="@id/newperson_fristname_temp"
+            android:layout_toRightOf="@id/newperson_fristname_temp"
+            android:singleLine="true" />
+
+        <TextView
+            android:id="@+id/newperson_secondname_temp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/newperson_fristname_temp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="15dp"
+            android:layout_toEndOf="@id/newperson_defheadphoto"
+            android:layout_toRightOf="@id/newperson_defheadphoto"
+            android:text="@string/newperson_secondname"
+            android:textColor="#000000"
+            android:textSize="20sp" />
+
+        <EditText
+            android:id="@+id/newperson_secondname"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/newperson_secondname_temp"
+            android:layout_toEndOf="@id/newperson_secondname_temp"
+            android:layout_toRightOf="@id/newperson_secondname_temp"
+            android:singleLine="true" />
+    </RelativeLayout>
+
+    <!--
+         <ListView
+        android:id="@+id/newperson_list_phone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#ffffff"
+        android:layout_marginTop="10dp"
+        android:dividerHeight="5px" >
+    </ListView>
+
+    <ListView
+        android:id="@+id/newperson_list_email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#ffffff"
+        android:layout_marginTop="10dp"
+        android:dividerHeight="5px" >
+    </ListView>
+
+    <ListView
+        android:id="@+id/newperson_list_address"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#ffffff"
+        android:layout_marginTop="10dp"
+        android:dividerHeight="5px" >
+    </ListView>
+    -->
+
+    <LinearLayout
+        android:id="@+id/newperson_list_phone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" 
+        android:orientation="vertical">
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/newperson_list_email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" 
+        android:orientation="vertical"
+        >
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/newperson_list_address"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" 
+        android:orientation="vertical">
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/newperson_test"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:onClick="go"
+        android:padding="10dp"
+        android:text="check" />
+
+</LinearLayout>

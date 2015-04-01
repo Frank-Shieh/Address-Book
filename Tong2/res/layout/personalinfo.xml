@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="#ffffff" >
+
+        <ImageView
+            android:id="@+id/headphotoback_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_margin="15dp"
+            android:src="@drawable/defheadphoto_personal" />
+
+        <ImageView
+            android:id="@+id/headphoto_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/headphotoback_info"
+            android:layout_alignLeft="@id/headphotoback_info"
+            android:layout_alignRight="@id/headphotoback_info"
+            android:layout_alignTop="@id/headphotoback_info"
+            android:layout_centerVertical="true" />
+
+        <TextView
+            android:id="@+id/name_text_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toEndOf="@id/headphotoback_info"
+            android:layout_toRightOf="@id/headphotoback_info"
+            android:text="@string/person_name"
+            android:textColor="#000000"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/name_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/name_text_info"
+            android:layout_centerVertical="true"
+            android:layout_toEndOf="@id/name_text_info"
+            android:layout_toRightOf="@id/name_text_info"
+            android:textColor="#000000"
+            android:textSize="20sp" />
+    </RelativeLayout>
+
+    <ListView
+        android:id="@+id/list_info"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:background="#ffffff" >
+    </ListView>
+
+    <!--
+         <Button 
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="0"
+        android:background="@drawable/delete_personalinfo"
+        android:text="@string/delete_personalinfo"
+        android:textColor="#ffffff"
+        android:textSize="20sp"
+        android:gravity="center"
+        android:layout_gravity="center_horizontal"
+        />
+    -->
+
+</LinearLayout>

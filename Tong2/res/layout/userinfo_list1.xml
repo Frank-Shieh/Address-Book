@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="10dp" 
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/title_userinfo_list"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_centerVertical="true"
+        android:textColor="#000000"
+        android:textSize="20sp" />
+
+    <ImageView
+        android:id="@+id/context_userinfo_list"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:src="@drawable/defheadphoto_personal" />
+    
+    <ImageView 
+        android:id="@+id/headphoto_userinfo_list"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@id/context_userinfo_list"
+        android:layout_alignStart="@id/context_userinfo_list"
+        android:layout_alignTop="@id/context_userinfo_list"
+        android:layout_alignRight="@id/context_userinfo_list"
+        android:layout_alignEnd="@id/context_userinfo_list"
+        android:layout_alignBottom="@id/context_userinfo_list"
+        />
+    
+
+</RelativeLayout>

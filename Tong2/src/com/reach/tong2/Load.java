@@ -7,6 +7,7 @@ import user.User;
 import cn.bmob.v3.Bmob;
 import cn.bmob.v3.BmobUser;
 import databasefactory.ReadContact;
+import filefactory.FileTamplate;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -28,6 +29,7 @@ public class Load extends Activity {
 		hasuser = (DataManager.user != null);
 		isFrist = (!hasuser && setting.getBoolean("isFrist", true));
 		Bmob.initialize(this, "e2e1d4107c3a430f8adf3d843aacd70e");
+		DataManager.APPPath = getCacheDir().getParentFile().toString();
 		Timer timer = new Timer();
 		TimerTask tt = null;
 		if (isFrist) {
@@ -35,6 +37,7 @@ public class Load extends Activity {
 			editor.putBoolean("isFrist", false);
 			editor.commit();
 			DataManager.frist();
+			FileTamplate.create();
 			target = "com.reach.tong2.Logn";
 		} else if (hasuser) {
 			target = "com.reach.tong2.Main";
@@ -42,6 +45,7 @@ public class Load extends Activity {
 		} else {
 			target = "com.reach.tong2.Logn";
 			DataManager.frist();
+			FileTamplate.create();
 		}
 		tt = new TimerTask() {
 			@Override

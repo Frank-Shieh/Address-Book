@@ -44,6 +44,7 @@ public class Personal extends Fragment implements OnItemClickListener {
 		mList1.setOnItemClickListener(this);
 		mList2.setAdapter(new PersonalAadapter(this.getActivity(), mList2Data,
 				R.layout.personal_list));
+		mList2.setOnItemClickListener(this);
 		setValueToView();
 		return view;
 	}
@@ -81,6 +82,8 @@ public class Personal extends Fragment implements OnItemClickListener {
 		case R.id.list2_personal:
 			switch (position) {
 			case 0:
+				Intent intent = new Intent("com.reach.tong2.UserInfo");
+				startActivity(intent);
 				break;
 			case 1:
 				break;
