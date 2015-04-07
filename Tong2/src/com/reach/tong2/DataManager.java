@@ -21,7 +21,7 @@ public class DataManager {
 	public static HashMap<String, Integer> chToMath = new HashMap<String, Integer>();
 	public static String excelStorePath;
 	public static final String[] PHONETYPE = { "移动号码", "家庭号码", "其他号码" };
-	public static final String[] EMAILTYPE = { "家庭邮件", "工作邮件" };
+	public static final String[] EMAILTYPE = { "家庭邮件", "工作邮件","其他邮件" };
 	public static final String[] ADDRESSTYPE = { "家庭地址", "工作地址", "其他地址" };
 	public static Person targetPerson;
 	public static LocalFiles localFiles;
@@ -157,6 +157,7 @@ public class DataManager {
 		public static final int DELETE = 1;
 		public static final int ADD = 2;
 		public static final int VISIT = 0;
+		public static final int EDIT = 3;
 	}
 
 	// public class Model {

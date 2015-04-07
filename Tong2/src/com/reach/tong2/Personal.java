@@ -19,8 +19,8 @@ public class Personal extends Fragment implements OnItemClickListener {
 
 	private ListView mList1;
 	private ListView mList2;
-	private String[] mList1Data = { "本地文件", "云盘文件" };
-	private String[] mList2Data = { "个人资料", "关于通讯君" };
+	private String[] mList1Data;
+	private String[] mList2Data;
 	private TextView mUserName;
 	private TextView mLocalFilesCount;
 	private TextView mNetFilesCount;
@@ -37,6 +37,8 @@ public class Personal extends Fragment implements OnItemClickListener {
 		mLocalFilesCount = (TextView) view
 				.findViewById(R.id.localfile_personal);
 		mNetFilesCount = (TextView) view.findViewById(R.id.netfile_personal);
+		mList1Data = getResources().getStringArray(R.array.personal_list1);
+		mList2Data = getResources().getStringArray(R.array.personal_list2);
 		mList1 = (ListView) view.findViewById(R.id.list1_personal);
 		mList2 = (ListView) view.findViewById(R.id.list2_personal);
 		mList1.setAdapter(new PersonalAadapter(this.getActivity(), mList1Data,
@@ -52,13 +54,13 @@ public class Personal extends Fragment implements OnItemClickListener {
 	private void setValueToView() {
 		if(DataManager.localFiles == null)
 			Log.i("file", "is null");
-		mLocalFilesCount.setText(this.getResources().getText(R.string.localfilescount_personal)
+		mLocalFilesCount.setText(this.getResources().getText(R.string.personal_localfilescount)
 				+ String.valueOf(DataManager.localFiles.getFilesCount()));
 		if(DataManager.user == null){
 			Log.i("file", "is null");
 			return;
 		}
-		mUserName.setText(this.getResources().getText(R.string.username_personal)+DataManager.user.getUsername());
+		mUserName.setText(this.getResources().getText(R.string.personal_username)+DataManager.user.getUsername());
 		mHeadPhoto.setImageBitmap(DataManager.getHeadphoto());
 	}
 

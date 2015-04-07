@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="personal_username">用户名：</string>
+    <string name="personal_localfilescount">本地文件数：</string>
+    <string name="personal_netfilecount">云盘文件数：</string>
+    <string name="personal_title">个人中心</string>
+    <string name="personal_lognout">登出</string>
+
+    <string-array name="personal_list1">
+        <item>本地文件</item>
+        <item>云盘文件</item>
+    </string-array>
+    <string-array name="personal_list2">
+        <item>个人资料</item>
+        <item>关于通讯君</item>
+    </string-array>
+
+</resources>

@@ -40,7 +40,8 @@ public class BatchSelect extends Activity implements OnClickListener,
 		mList = (ListView) this.findViewById(R.id.list_batchselect);
 		myAdapter = new BatchSelectAdapter(this, mPersons);
 		mList.setAdapter(myAdapter);
-
+		getActionBar().setDisplayHomeAsUpEnabled(true);
+		getActionBar().setDisplayShowHomeEnabled(false);
 	}
 
 	private void getRequestCode() {
@@ -88,7 +89,7 @@ public class BatchSelect extends Activity implements OnClickListener,
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		ArrayList<Person> target = new ArrayList<Person>();
-		
+
 		for (int i = 0; i < mPersons.size(); i++) {
 			if (mPersons.get(i).mIsFull) {
 				target.add(mPersons.get(i));
@@ -102,8 +103,9 @@ public class BatchSelect extends Activity implements OnClickListener,
 		case R.id.delete_batchdelete:
 			showDialog();
 			break;
-		default:
-			break;
+		case android.R.id.home:
+			finish();
+			return true;
 		}
 		return true;
 	}

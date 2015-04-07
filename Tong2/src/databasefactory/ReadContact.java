@@ -46,6 +46,8 @@ public class ReadContact {
 		mCursorID = mResolver.query(ContactsContract.RawContacts.CONTENT_URI,
 				contactsID, null, null, null);
 		getPersonById();
+		mCursorID.close();
+		mCursorPerson.close();
 	}
 
 	private void getPersonById() {
@@ -104,7 +106,6 @@ public class ReadContact {
 		Bitmap temp = null;
 		mHeadPhotoUri = ContentUris.withAppendedId(
 				ContactsContract.Contacts.CONTENT_URI, mID);
-		System.out.println(mHeadPhotoUri.toString());
 		mInputStream = ContactsContract.Contacts.openContactPhotoInputStream(
 				mResolver, mHeadPhotoUri);
 		temp = BitmapFactory.decodeStream(mInputStream);

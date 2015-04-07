@@ -76,7 +76,7 @@
                 android:layout_alignBottom="@id/usrname"
                 android:layout_toLeftOf="@id/usrname"
                 android:layout_toStartOf="@id/usrname"
-                android:text="@string/username_register" />
+                android:text="@string/register_username" />
 
             <EditText
                 android:id="@+id/pwd"
@@ -99,7 +99,7 @@
                 android:layout_alignBottom="@id/pwd"
                 android:layout_toLeftOf="@id/pwd"
                 android:layout_toStartOf="@id/pwd"
-                android:text="@string/password_register" />
+                android:text="@string/register_password" />
 
             <EditText
                 android:id="@+id/pwdcom"
@@ -120,7 +120,7 @@
                 android:layout_alignBottom="@id/pwdcom"
                 android:layout_toLeftOf="@id/pwdcom"
                 android:layout_toStartOf="@id/pwdcom"
-                android:text="@string/passwordcomfirm_register" />
+                android:text="@string/register_passwordcomfirm" />
 
             <RadioGroup
                 android:id="@+id/sex"
@@ -136,11 +136,11 @@
 
                 <RadioButton
                     android:id="@+id/male"
-                    android:text="@string/sex_male" />
+                    android:text="@string/register_sex_male" />
 
                 <RadioButton
                     android:id="@+id/female"
-                    android:text="@string/sex_female" />
+                    android:text="@string/register_sex_female" />
             </RadioGroup>
 
             <TextView
@@ -149,7 +149,7 @@
                 android:layout_alignBottom="@id/sex"
                 android:layout_toLeftOf="@id/sex"
                 android:layout_toStartOf="@id/sex"
-                android:text="@string/sex_register" />
+                android:text="@string/register_sex" />
 
             <EditText
                 android:id="@+id/email"
@@ -170,7 +170,7 @@
                 android:layout_alignBottom="@id/email"
                 android:layout_toLeftOf="@id/email"
                 android:layout_toStartOf="@id/email"
-                android:text="@string/email_register" />
+                android:text="@string/register_email" />
 
             <EditText
                 android:id="@+id/phone"
@@ -191,7 +191,7 @@
                 android:layout_alignBottom="@id/phone"
                 android:layout_toLeftOf="@id/phone"
                 android:layout_toStartOf="@id/phone"
-                android:text="@string/phone_register" />
+                android:text="@string/register_phone" />
 
         </RelativeLayout>
 
@@ -201,9 +201,9 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_margin="15dp"
-            android:background="@drawable/submit_logn"
+            android:background="@drawable/selector_button"
             android:contentDescription="@+string/registerbutton"
-            android:text="@string/submit_register"
+            android:text="@string/register_submit"
             android:textColor="#ffffff" />
     </LinearLayout>
 

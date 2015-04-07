@@ -84,7 +84,7 @@
             android:layout_centerHorizontal="true"
             android:layout_below="@id/logn"
             android:layout_margin="15dp"
-            android:background="@drawable/submit_logn"
+            android:background="@drawable/selector_button"
             android:text="@string/submit_logn"
             android:textColor="#ffffff"
             android:contentDescription="@+string/submit" 

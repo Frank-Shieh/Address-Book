@@ -1,137 +1,139 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@drawable/background"
-    android:orientation="vertical" >
+    android:layout_height="match_parent" >
 
-    <RelativeLayout
+    <LinearLayout
+        android:id="@+id/main"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#ffffff"
-        android:padding="10dp" >
+        android:background="@drawable/background"
+        android:orientation="vertical" >
 
-        <ImageView
-            android:id="@+id/newperson_defheadphoto"
-            android:layout_width="wrap_content"
+        <RelativeLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:src="@drawable/defheadphoto_personal" />
+            android:background="#ffffff" >
 
-        <ImageView
-            android:id="@+id/newperson_headphoto"
-            android:layout_width="wrap_content"
+            <ImageView
+                android:id="@+id/newperson_defheadphoto"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_margin="10dp"
+                android:background="@drawable/defheadphoto_personal" />
+
+            <ImageView
+                android:id="@+id/newperson_headphoto"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@id/newperson_defheadphoto"
+                android:layout_alignEnd="@id/newperson_defheadphoto"
+                android:layout_alignLeft="@id/newperson_defheadphoto"
+                android:layout_alignRight="@id/newperson_defheadphoto"
+                android:layout_alignStart="@id/newperson_defheadphoto"
+                android:layout_alignTop="@id/newperson_defheadphoto" />
+
+            <TextView
+                android:id="@+id/newperson_name_temp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@id/newperson_defheadphoto"
+                android:layout_toRightOf="@id/newperson_defheadphoto"
+                android:layout_centerVertical="true"
+                android:text="@string/newperson_name"
+                android:textSize="20sp" />
+
+            <EditText
+                android:id="@+id/newperson_name"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@id/newperson_name_temp"
+                android:layout_toEndOf="@id/newperson_name_temp"
+                android:layout_toRightOf="@id/newperson_name_temp"
+                android:inputType="textPersonName"
+                android:layout_centerVertical="true"
+                android:singleLine="true" >
+            </EditText>
+
+<!--             <TextView
+                android:id="@+id/newperson_secondname_temp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@id/newperson_firstname_temp"
+                android:layout_alignStart="@id/newperson_firstname_temp"
+                android:layout_below="@id/newperson_firstname_temp"
+                android:layout_marginTop="15dp"
+                android:text="@string/newperson_secondname"
+                android:textSize="20sp" />
+
+            <EditText
+                android:id="@+id/newperson_secondname"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@id/newperson_secondname_temp"
+                android:layout_toEndOf="@id/newperson_secondname_temp"
+                android:layout_toRightOf="@id/newperson_secondname_temp"
+                android:inputType="textPersonName"
+                android:singleLine="true" >
+            </EditText> -->
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/newperson_context_phone"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignBottom="@id/newperson_defheadphoto"
-            android:layout_alignEnd="@id/newperson_defheadphoto"
-            android:layout_alignLeft="@id/newperson_defheadphoto"
-            android:layout_alignRight="@id/newperson_defheadphoto"
-            android:layout_alignStart="@id/newperson_defheadphoto"
-            android:layout_alignTop="@id/newperson_defheadphoto" />
+            android:layout_marginTop="10dp"
+            android:background="#ffffff"
+            android:orientation="vertical" >
+        </LinearLayout>
 
-        <TextView
-            android:id="@+id/newperson_fristname_temp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="15dp"
-            android:layout_marginStart="15dp"
-            android:layout_marginTop="15dp"
-            android:layout_toEndOf="@id/newperson_defheadphoto"
-            android:layout_toRightOf="@id/newperson_defheadphoto"
-            android:text="@string/newperson_fristname"
-            android:textColor="#000000"
-            android:textSize="20sp" />
-
-        <EditText
-            android:id="@+id/newperson_fristname"
+        <Button
+            android:id="@+id/newperson_button_addphone"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
-            android:layout_alignBottom="@id/newperson_fristname_temp"
-            android:layout_toEndOf="@id/newperson_fristname_temp"
-            android:layout_toRightOf="@id/newperson_fristname_temp"
-            android:singleLine="true" />
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/selector_button"
+            android:text="@string/newperson_addphone" >
+        </Button>
 
-        <TextView
-            android:id="@+id/newperson_secondname_temp"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:id="@+id/newperson_context_eamil"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/newperson_fristname_temp"
-            android:layout_marginLeft="15dp"
-            android:layout_marginStart="15dp"
-            android:layout_marginTop="15dp"
-            android:layout_toEndOf="@id/newperson_defheadphoto"
-            android:layout_toRightOf="@id/newperson_defheadphoto"
-            android:text="@string/newperson_secondname"
-            android:textColor="#000000"
-            android:textSize="20sp" />
+            android:layout_marginTop="10dp"
+            android:background="#ffffff"
+            android:orientation="vertical" >
+        </LinearLayout>
 
-        <EditText
-            android:id="@+id/newperson_secondname"
+        <Button
+            android:id="@+id/newperson_button_addeamil"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
-            android:layout_alignBottom="@id/newperson_secondname_temp"
-            android:layout_toEndOf="@id/newperson_secondname_temp"
-            android:layout_toRightOf="@id/newperson_secondname_temp"
-            android:singleLine="true" />
-    </RelativeLayout>
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/selector_button"
+            android:text="@string/newperson_addemail" />
 
-    <!--
-         <ListView
-        android:id="@+id/newperson_list_phone"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#ffffff"
-        android:layout_marginTop="10dp"
-        android:dividerHeight="5px" >
-    </ListView>
+        <LinearLayout
+            android:id="@+id/newperson_context_address"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="#ffffff"
+            android:orientation="vertical" >
+        </LinearLayout>
 
-    <ListView
-        android:id="@+id/newperson_list_email"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#ffffff"
-        android:layout_marginTop="10dp"
-        android:dividerHeight="5px" >
-    </ListView>
-
-    <ListView
-        android:id="@+id/newperson_list_address"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#ffffff"
-        android:layout_marginTop="10dp"
-        android:dividerHeight="5px" >
-    </ListView>
-    -->
-
-    <LinearLayout
-        android:id="@+id/newperson_list_phone"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" 
-        android:orientation="vertical">
+        <Button
+            android:id="@+id/newperson_button_addaddress"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/selector_button"
+            android:text="@string/newperson_addaddress" >
+        </Button>
     </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/newperson_list_email"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" 
-        android:orientation="vertical"
-        >
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/newperson_list_address"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" 
-        android:orientation="vertical">
-    </LinearLayout>
-
-    <Button
-        android:id="@+id/newperson_test"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:onClick="go"
-        android:padding="10dp"
-        android:text="check" />
-
-</LinearLayout>
+</ScrollView>

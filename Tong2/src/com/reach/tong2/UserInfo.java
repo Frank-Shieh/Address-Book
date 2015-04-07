@@ -3,6 +3,7 @@ package com.reach.tong2;
 import customadapter.UserInfoAdapter;
 import android.app.Activity;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -25,7 +26,7 @@ public class UserInfo extends Activity implements OnItemClickListener{
 		setContentView(R.layout.userinfo);
 		list1 = (ListView) this.findViewById(R.id.list1_userinfo);
 		list1.setOnItemClickListener(this);
-		mAdapter1 = new UserInfoAdapter(this, R.layout.userinfo_list1, null, null);
+		mAdapter1 = new UserInfoAdapter(this, R.layout.userinfo_list1, new String[]{getResources().getString(R.string.userinfo_headphoto)}, null);
 		list1.setAdapter(mAdapter1);
 		list2 = (ListView) this.findViewById(R.id.list2_userinfo);
 		list2.setOnItemClickListener(this);
@@ -39,10 +40,9 @@ public class UserInfo extends Activity implements OnItemClickListener{
 		mValue[1] = DataManager.user.getPhone();
 		mValue[2] = DataManager.user.getEmail();
 		mValue[3] = DataManager.user.getSex();
-		mItem[0] = "用户名";
-		mItem[1] = "电话号码";
-		mItem[2] = "电子邮件";
-		mItem[3] = "性别";
+		mItem = getResources().getStringArray(R.array.userinfo_item);
+		getActionBar().setDisplayHomeAsUpEnabled(true);
+		getActionBar().setDisplayShowHomeEnabled(false);
 	}
 
 	@Override
@@ -51,4 +51,15 @@ public class UserInfo extends Activity implements OnItemClickListener{
 		// TODO Auto-generated method stub
 		
 	}
+	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch (item.getItemId()) {
+		case android.R.id.home:
+			finish();
+			return true;
+		}
+		return super.onOptionsItemSelected(item);
+	}
+	
 }

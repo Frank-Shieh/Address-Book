@@ -1,2 +1,6 @@
 /com/
 /.gitignore
+/customadapter/
+/databasefactory/
+/filefactory/
+/datacontrol/

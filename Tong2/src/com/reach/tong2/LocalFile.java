@@ -6,6 +6,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -33,6 +34,8 @@ public class LocalFile extends Activity implements OnItemClickListener {
 		mLocalFileAdapter = new LocalFileAdapter(this, mFiles);
 		mList.setAdapter(mLocalFileAdapter);
 		mList.setOnItemClickListener(this);
+		getActionBar().setDisplayHomeAsUpEnabled(true);
+		getActionBar().setDisplayShowHomeEnabled(false);
 		getCode();
 	}
 
@@ -79,6 +82,16 @@ public class LocalFile extends Activity implements OnItemClickListener {
 		// TODO Auto-generated method stub
 		super.onActivityResult(requestCode, resultCode, data);
 		setResult(mRequestCodeSrc);
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch (item.getItemId()) {
+		case android.R.id.home:
+			finish();
+			return true;
+		}
+		return super.onOptionsItemSelected(item);
 	}
 
 }

@@ -3,20 +3,18 @@ package com.reach.tong2;
 import java.util.ArrayList;
 
 import customadapter.MainPageAdapter;
+import filefactory.UpDataExcel;
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
-import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.ListView;
 
-public class OpenFile extends Activity implements OnItemClickListener,
-		OnItemLongClickListener, OnClickListener {
+public class OpenFile extends Activity implements OnItemClickListener{
 
 	private ListView mList;
 	private MainPageAdapter mAdapter;
@@ -30,11 +28,13 @@ public class OpenFile extends Activity implements OnItemClickListener,
 		setContentView(R.layout.openfile);
 		mList = (ListView) this.findViewById(R.id.excelcontact);
 		mList.setOnItemClickListener(this);
-		mList.setOnItemLongClickListener(this);
 		mPerson = DataManager
 				.getAllPerson(DataManager.RequestCode.SrcCode.SRC_EXCEL);
 		mAdapter = new MainPageAdapter(this, mPerson);
 		mList.setAdapter(mAdapter);
+		getActionBar().setDisplayHomeAsUpEnabled(true);
+		getActionBar().setTitle(DataManager.persentfilename);
+		getActionBar().setDisplayShowHomeEnabled(false);
 	}
 
 	@Override
@@ -61,28 +61,28 @@ public class OpenFile extends Activity implements OnItemClickListener,
 	}
 
 	@Override
-	public boolean onItemLongClick(AdapterView<?> parent, View view,
-			int position, long id) {
-		showDialog();
-		return true;
-	}
-
-	private void showDialog() {
-		AlertDialog.Builder dialog = new AlertDialog.Builder(this);
-		dialog.setTitle("«Î—°‘Ò“ªœÓ");
-		String[] temp = getResources().getStringArray(
-				R.array.openfile_dialog_show);
-		dialog.setItems(temp, this);
-		dialog.create().show();
+	public boolean onCreateOptionsMenu(Menu menu) {
+		getMenuInflater().inflate(R.menu.openfile, menu);
+		return super.onCreateOptionsMenu(menu);
 	}
 
 	@Override
-	public void onClick(DialogInterface dialog, int which) {
+	public boolean onOptionsItemSelected(MenuItem item) {
 		Intent intent = null;
-		switch (which) {
-		case 0:
+		switch (item.getItemId()) {
+		case android.R.id.home:
+			UpDataExcel temp = new UpDataExcel(UpDataExcel.CHANGE, DataManager.persentfilename);
+			finish();
+			return true;
+		case R.id.openfile_menu_create:
+			intent = new Intent("com.reach.tong2.NewPerson");
+			intent.putExtra(DataManager.ActionCode.ACTIONCODE,
+					DataManager.ActionCode.ADD);
+			intent.putExtra(DataManager.RequestCode.SrcCode.REQUESTCODE_SRC,
+					DataManager.RequestCode.SrcCode.SRC_EXCEL);
+			startActivityForResult(intent,DataManager.RequestCode.SrcCode.SRC_EXCEL);
 			break;
-		case 1:
+		case R.id.openfile_menu_edit:
 			intent = new Intent("com.reach.tong2.BatchSelect");
 			intent.putExtra(DataManager.RequestCode.SrcCode.REQUESTCODE_SRC,
 					DataManager.RequestCode.SrcCode.SRC_EXCEL);
@@ -93,15 +93,17 @@ public class OpenFile extends Activity implements OnItemClickListener,
 			startActivityForResult(intent,
 					DataManager.RequestCode.SrcCode.SRC_EXCEL);
 			break;
-		case 2:
+		case R.id.openfile_menu_input:
 			intent = new Intent("com.reach.tong2.ChoiseSources");
-//			intent.putExtra(DataManager.RequestCode.SrcCode.REQUESTCODE_SRC,
-//					DataManager.RequestCode.SrcCode.SRC_EXCEL);
-//			intent.putExtra(DataManager.RequestCode.DstCode.REQUESTCODE_DST,
-//					DataManager.RequestCode.DstCode.DST_LOCAL);
-			startActivityForResult(intent, DataManager.RequestCode.SrcCode.SRC_EXCEL);
+			// intent.putExtra(DataManager.RequestCode.SrcCode.REQUESTCODE_SRC,
+			// DataManager.RequestCode.SrcCode.SRC_EXCEL);
+			// intent.putExtra(DataManager.RequestCode.DstCode.REQUESTCODE_DST,
+			// DataManager.RequestCode.DstCode.DST_LOCAL);
+			startActivityForResult(intent,
+					DataManager.RequestCode.SrcCode.SRC_EXCEL);
 			break;
 		}
+		return super.onOptionsItemSelected(item);
 	}
 
 }

@@ -4,13 +4,13 @@
         android:id="@+id/item_personalinfo_delete"
         android:showAsAction="always"
         android:icon="@drawable/icon_delete"
-        android:title="删除"/>
+        android:title="@string/deleteperson"/>
      
     <item 
         android:id="@+id/item_personalinfo_edit"
         android:showAsAction="always"
         android:icon="@drawable/icon_edit"
-        android:title="编辑"
+        android:title="@string/editperson"
         />
    
 

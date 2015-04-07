@@ -79,6 +79,8 @@ public class Transation {
 				return emailPosition.get("家庭邮件");
 			case ContactsContract.CommonDataKinds.Email.TYPE_WORK:
 				return emailPosition.get("工作邮件");
+			case ContactsContract.CommonDataKinds.Email.TYPE_CUSTOM:
+				return emailPosition.get("其他邮件");
 			}
 		case DataManager.FamilyType.FAMILY_PHONE:
 			switch (data2) {

@@ -48,6 +48,9 @@ public class PersonalInfo extends Activity implements OnItemClickListener,
 		mAdapter = new PersonalInfoAdapter(this, mPerson);
 		mList.setAdapter(mAdapter);
 		mList.setOnItemClickListener(this);
+		getActionBar().setDisplayHomeAsUpEnabled(true);
+		getActionBar().setTitle(DataManager.targetPerson.getName());
+		getActionBar().setDisplayShowHomeEnabled(false);
 	}
 
 	private void setValueToView() {
@@ -88,11 +91,18 @@ public class PersonalInfo extends Activity implements OnItemClickListener,
 		// TODO Auto-generated method stub
 		switch (item.getItemId()) {
 		case R.id.item_personalinfo_edit:
-			Intent intent = new Intent("com.reach.tong2.PersonalInfoChange");
+			Intent intent = new Intent("com.reach.tong2.NewPerson");
+			intent.putExtra(DataManager.ActionCode.ACTIONCODE,
+					DataManager.ActionCode.EDIT);
+			intent.putExtra(DataManager.RequestCode.SrcCode.REQUESTCODE_SRC, mRequestCodeSrc);
 			startActivityForResult(intent, 1);
+			setResult(mRequestCodeSrc);
 			return true;
 		case R.id.item_personalinfo_delete:
 			showDialog();
+			return true;
+		case android.R.id.home:
+			finish();
 			return true;
 		default:
 			return super.onOptionsItemSelected(item);

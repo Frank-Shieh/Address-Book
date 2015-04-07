@@ -2,7 +2,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android" >
     <item 
         android:id="@+id/delete_batchdelete"
-        android:title="@string/delete_personalinfo"
+        android:title="@string/deleteperson"
         android:icon="@drawable/icon_delete"
         android:showAsAction="always"
         />

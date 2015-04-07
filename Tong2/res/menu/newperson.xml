@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+    <item 
+        android:id="@+id/newperson_menu_done"
+        android:showAsAction="always"
+        android:title="@string/newperson_menu_done"
+        />
+
+</menu>

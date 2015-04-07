@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="userinfo_title">个人资料</string>
+    <string name="userinfo_headphoto">头像</string>
+
+    <string-array name="userinfo_item">
+        <item>用户名</item>
+        <item>电话号码</item>
+        <item>电子邮件</item>
+        <item>性别</item>
+    </string-array>
+</resources>

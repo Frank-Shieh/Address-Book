@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="deleteperson">删除联系人</string>
+    <string name="editperson">编辑联系人</string>
+</resources>

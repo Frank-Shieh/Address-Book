@@ -15,14 +15,14 @@ public class Person {
 	private Bitmap mHeadPhoto;
 	private HashMap<Integer, ArrayList<String>> mPostAddress = new HashMap<Integer, ArrayList<String>>();
 	public boolean mIsFull;
-	
+
 	public String mHasheadphoto = new String("no");
 
 	public Person() {
-		
+
 	}
-	
-	public void addData(int family, int type, ArrayList<String> value){
+
+	public void addData(int family, int type, ArrayList<String> value) {
 		switch (family) {
 		case DataManager.FamilyType.FAMILY_PHONE:
 			mPhone.put(type, value);
@@ -37,8 +37,28 @@ public class Person {
 			break;
 		}
 	}
-	
-	public ArrayList<String> getData(int family, int type){
+
+	public void addAllFamliyData(int family, HashMap<Integer, ArrayList<String>> value) {
+		switch (family) {
+		case DataManager.FamilyType.FAMILY_PHONE:
+			mPhone = value;
+			break;
+		case DataManager.FamilyType.FAMILY_EMAIL:
+			mEmail = value;
+			break;
+		case DataManager.FamilyType.FAMILY_ADDRESS:
+			mPostAddress = value;
+			break;
+		}
+	}
+
+	public void cleanAllData() {
+		mPhone.clear();
+		mPostAddress.clear();
+		mEmail.clear();
+	}
+
+	public ArrayList<String> getData(int family, int type) {
 		switch (family) {
 		case DataManager.FamilyType.FAMILY_PHONE:
 			return mPhone.get(type);
@@ -49,7 +69,7 @@ public class Person {
 		}
 		return null;
 	}
-	
+
 	public void addPhone(ArrayList<String> value, int index) {
 		mPhone.put(index, value);
 	}
@@ -75,11 +95,11 @@ public class Person {
 	}
 
 	public ArrayList<String> getPhone(int index) {
-			return mPhone.get(index);
+		return mPhone.get(index);
 	}
 
 	public ArrayList<String> getEmail(int index) {
-			return mEmail.get(index);
+		return mEmail.get(index);
 	}
 
 	public Bitmap getHeadPhoto() {
@@ -87,7 +107,7 @@ public class Person {
 	}
 
 	public ArrayList<String> getPostAddress(int index) {
-			return mPostAddress.get(index);
+		return mPostAddress.get(index);
 	}
 
 }

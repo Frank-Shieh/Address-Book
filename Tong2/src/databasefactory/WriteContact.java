@@ -18,6 +18,7 @@ public class WriteContact extends ContactContral{
 	public WriteContact(Context context) {
 		super(context);
 		mPersons = DataManager.getAllPerson(DataManager.RequestCode.SrcCode.SRC_TEMP);
+		DataManager.mListTemp = null;
 	}
 
 	public void writeContact() {

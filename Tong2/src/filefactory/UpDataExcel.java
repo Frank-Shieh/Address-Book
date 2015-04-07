@@ -13,6 +13,7 @@ public class UpDataExcel {
 	public UpDataExcel(int model,String name){
 		this.mModel = model;
 		this.mFileName = name;
+		UpData();
 	}
 	
 	public void UpData(){

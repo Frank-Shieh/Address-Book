@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<string name="newperson_title_create">新建联系人</string>
+	<string name="newperson_title_edit">编辑联系人</string>
+    <string name="newperson_name">姓名：</string>
+    <string name="newperson_phone">电话</string>
+    <string name="newperson_email">电子邮件</string>
+    <string name="newperson_address">地址</string>
+    <string name="newperson_addphone">添加电话</string>
+    <string name="newperson_addemail">添加邮件</string>
+    <string name="newperson_addaddress">添加地址</string>
+	<string name="newperson_menu_done">完成</string>
+	<string-array name="newperson_hint">
+	    <item >请输入号码</item>
+	    <item >请输入邮箱</item>
+	    <item >请输入地址</item>
+	</string-array>
+</resources>

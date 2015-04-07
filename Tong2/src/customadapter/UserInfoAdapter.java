@@ -27,7 +27,6 @@ public class UserInfoAdapter extends CustomAdapter {
 			break;
 		case R.layout.userinfo_list2:
 			mKey = false;
-			Log.i("list2", "aaaaaaaaaaaaaaaaaaa");
 			break;
 		}
 		this.mItem = item;
@@ -86,7 +85,7 @@ public class UserInfoAdapter extends CustomAdapter {
 		if (mKey) {
 			if (DataManager.getHeadphoto() != null)
 				vh.mHeadPhoto.setImageBitmap(DataManager.getHeadphoto());
-			vh.mTitle.setText("Í·Ïñ");
+			vh.mTitle.setText(mItem[position]);
 		} else {
 			vh.mTitle.setText(mItem[position]);
 			vh.mValue.setText(mValue[position]);

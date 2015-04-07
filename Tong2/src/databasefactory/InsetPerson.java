@@ -19,8 +19,8 @@ public class InsetPerson {
 	private ContentValues mValues;
 	private int mID;
 	private Uri uri = ContactsContract.Data.CONTENT_URI;
-	
-	public InsetPerson(Person target, ContentResolver resolver,int id){
+
+	public InsetPerson(Person target, ContentResolver resolver, int id) {
 		mValues = new ContentValues();
 		mResolver = resolver;
 		mID = id;
@@ -30,7 +30,7 @@ public class InsetPerson {
 		insetAddress(target);
 		insetHeadPhoto(target);
 	}
-	
+
 	private void insetName(Person target) {
 		// 添加姓名
 		mValues.put("raw_contact_id", mID);
@@ -62,7 +62,7 @@ public class InsetPerson {
 	}
 
 	private void insetEmail(Person target) {
-		//添加邮件
+		// 添加邮件
 		for (int i = 0; i < DataManager.EMAILTYPE.length; i++) {
 			if (target.getEmail(i) != null) {
 				for (int j = 0; j < target.getEmail(i).size(); j++) {
@@ -79,8 +79,8 @@ public class InsetPerson {
 		}
 	}
 
-	private void insetAddress(Person target){
-		//添加地址
+	private void insetAddress(Person target) {
+		// 添加地址
 		for (int i = 0; i < DataManager.ADDRESSTYPE.length; i++) {
 			if (target.getPostAddress(i) != null) {
 				for (int j = 0; j < target.getPostAddress(i).size(); j++) {
@@ -88,8 +88,8 @@ public class InsetPerson {
 							DataManager.MimeType.POSTALADDRESS_V2);
 					mValues.put("raw_contact_id", mID);
 					mValues.put("data1", target.getPostAddress(i).get(j));
-					mValues.put("data2",
-							DataManager.chToMath.get(DataManager.ADDRESSTYPE[i]));
+					mValues.put("data2", DataManager.chToMath
+							.get(DataManager.ADDRESSTYPE[i]));
 					mResolver.insert(uri, mValues);
 					mValues.clear();
 				}
@@ -97,14 +97,15 @@ public class InsetPerson {
 		}
 	}
 
-	private void insetHeadPhoto(Person target){
-		//添加头像
+	private void insetHeadPhoto(Person target) {
+		// 添加头像
 		mValues.put("raw_contact_id", mID);
 		mValues.put("data14", 1);
 		mValues.put(ContactsContract.Data.MIMETYPE, DataManager.MimeType.PHOTO);
 		ByteArrayOutputStream os = new ByteArrayOutputStream();
 		Bitmap temp = target.getHeadPhoto();
-		temp.compress(Bitmap.CompressFormat.PNG, 100, os);
+		if (temp != null)
+			temp.compress(Bitmap.CompressFormat.PNG, 100, os);
 		mValues.put(Photo.PHOTO, os.toByteArray());
 		mResolver.insert(uri, mValues);
 		mValues.clear();

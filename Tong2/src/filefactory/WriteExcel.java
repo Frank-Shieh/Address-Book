@@ -27,7 +27,7 @@ public class WriteExcel extends FileWrite {
 	private int mIndex = 0;
 	private HSSFCellStyle mStyle;
 	private int mRowIndex;
-	private String mFileName = "test1.xls";
+	private String mFileName = "test.xls";
 
 	public WriteExcel(int model) {
 		// TODO Auto-generated constructor stub
@@ -67,7 +67,7 @@ public class WriteExcel extends FileWrite {
 	private void putData() {
 		ByteArrayOutputStream baos = null;
 		mStyle.setAlignment(HSSFCellStyle.ALIGN_JUSTIFY);
-
+		
 		for (int i = 0; i < mPersons.size(); i++, mIndex = 0, mRowIndex++) {
 			mRow = mSheet.createRow(mRowIndex);
 			Person person = mPersons.get(i);
